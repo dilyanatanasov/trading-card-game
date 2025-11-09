@@ -30,7 +30,12 @@
       "Bash(timeout 10 docker-compose logs:*)",
       "Bash(git init:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Trading Card Game App\n\nA full-stack trading card application with real-time battle system.\n\nFeatures:\n- Daily card distribution system\n- Card collection and marketplace\n- Gift and trade system with friends\n- Real-time card battles with WebSocket\n- Attack/defense card mechanics\n- Dark mode support\n- Epic fantasy-themed UI\n\nTech Stack:\n- Frontend: React + TypeScript + Vite + Tailwind CSS\n- Backend: NestJS + TypeORM + PostgreSQL\n- Real-time: Socket.IO\n- Containerization: Docker + Docker Compose\n\n🤖 Generated with Claude Code (https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Trading Card Game App\n\nA full-stack trading card application with real-time battle system.\n\nFeatures:\n- Daily card distribution system\n- Card collection and marketplace\n- Gift and trade system with friends\n- Real-time card battles with WebSocket\n- Attack/defense card mechanics\n- Dark mode support\n- Epic fantasy-themed UI\n\nTech Stack:\n- Frontend: React + TypeScript + Vite + Tailwind CSS\n- Backend: NestJS + TypeORM + PostgreSQL\n- Real-time: Socket.IO\n- Containerization: Docker + Docker Compose\n\n🤖 Generated with Claude Code (https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(node:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

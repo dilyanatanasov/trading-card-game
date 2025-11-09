@@ -100,7 +100,8 @@ class GameSocketService {
   placeCard(
     gameId: string,
     cardId: string,
-    position: number
+    position: number,
+    mode?: string
   ): Promise<{ success: boolean; game?: Game; error?: string }> {
     return new Promise((resolve) => {
       if (!this.socket?.connected) {
@@ -108,7 +109,7 @@ class GameSocketService {
         return;
       }
 
-      this.socket.emit('placeCard', { gameId, cardId, position }, (response: any) => {
+      this.socket.emit('placeCard', { gameId, cardId, position, mode }, (response: any) => {
         resolve(response);
       });
     });

@@ -155,7 +155,7 @@ export class GameService {
       playerId: userId,
       position: placeCardDto.position,
       row,
-      mode: CardMode.ATTACK,
+      mode: placeCardDto.mode || CardMode.ATTACK, // Use provided mode or default to ATTACK
       hasActedThisTurn: true, // Card just placed, cannot act immediately
     });
 

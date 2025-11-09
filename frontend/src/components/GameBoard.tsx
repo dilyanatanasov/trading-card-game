@@ -18,6 +18,7 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [selectedBoardCard, setSelectedBoardCard] = useState<GameCard | null>(null);
   const [actionMode, setActionMode] = useState<'place' | 'attack' | 'switch' | null>(null);
+  const [placementMode, setPlacementMode] = useState<CardMode>(CardMode.ATTACK);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -86,10 +87,11 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
     setLoading(true);
     setError(null);
     try {
-      const result = await gameSocket.placeCard(game.id, selectedCard.id, position);
+      const result = await gameSocket.placeCard(game.id, selectedCard.id, position, placementMode);
       if (result.success) {
         setSelectedCard(null);
         setActionMode(null);
+        setPlacementMode(CardMode.ATTACK); // Reset to attack mode
       } else {
         setError(result.error || 'Failed to place card');
         setLoading(false);
@@ -200,62 +202,127 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
     );
     const isMyRow = (row === 0 && isPlayer1) || (row === 1 && !isPlayer1);
     const canPlace = actionMode === 'place' && isMyRow && !cardInSlot && isMyTurn;
+    const isSelected = cardInSlot && selectedBoardCard?.id === cardInSlot.id;
 
     return (
-      <div
-        key={`${row}-${position}`}
-        onClick={() => {
-          if (canPlace) {
-            placeCard(position);
-          } else if (cardInSlot && isMyRow && isMyTurn) {
-            // Clicking own card - show actions immediately
-            setSelectedBoardCard(cardInSlot);
-            setActionMode(null);
-            setSelectedCard(null);
-          } else if (cardInSlot && !isMyRow && actionMode === 'attack') {
-            attack(cardInSlot.id);
-          }
-        }}
-        className={`
-          aspect-[2/3] rounded-lg border-2 transition-all cursor-pointer
-          ${canPlace ? 'border-green-500 bg-green-100 dark:bg-green-900/20 hover:bg-green-200 dark:hover:bg-green-900/40' : ''}
-          ${!cardInSlot ? 'border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50' : ''}
-          ${cardInSlot && selectedBoardCard?.id === cardInSlot.id ? 'ring-4 ring-purple-500' : ''}
-          ${cardInSlot && !isMyRow && actionMode === 'attack' ? 'border-red-500 hover:bg-red-100 dark:hover:bg-red-900/20' : ''}
-        `}
-      >
-        {cardInSlot && cardInSlot.card ? (
-          <div className="h-full flex items-center justify-center overflow-visible">
-            <div className={`h-full w-full flex flex-col p-2 bg-white dark:bg-gray-800 rounded-lg transition-transform shadow-lg ${cardInSlot.mode === CardMode.DEFENSE ? 'rotate-90 scale-90' : ''}`}>
-              <div className="text-xs font-bold truncate mb-1">{cardInSlot.card.name}</div>
-              <div className="flex-1 flex items-center justify-center">
-                <img
-                  src={cardInSlot.card.imageUrl}
-                  alt={cardInSlot.card.name}
-                  className="w-full h-full object-cover rounded"
-                />
+      <div key={`${row}-${position}`} className="relative">
+        <div
+          onClick={() => {
+            if (canPlace) {
+              placeCard(position);
+            } else if (cardInSlot && isMyRow && isMyTurn) {
+              // Clicking own card - show actions immediately
+              setSelectedBoardCard(cardInSlot);
+              setActionMode(null);
+              setSelectedCard(null);
+            } else if (cardInSlot && !isMyRow && actionMode === 'attack') {
+              attack(cardInSlot.id);
+            }
+          }}
+          className={`
+            aspect-[2/3] rounded-lg border-2 transition-all cursor-pointer
+            ${canPlace ? 'border-green-500 bg-green-100 dark:bg-green-900/20 hover:bg-green-200 dark:hover:bg-green-900/40' : ''}
+            ${!cardInSlot ? 'border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50' : ''}
+            ${isSelected ? 'ring-4 ring-purple-500' : ''}
+            ${cardInSlot && !isMyRow && actionMode === 'attack' ? 'border-red-500 hover:bg-red-100 dark:hover:bg-red-900/20' : ''}
+          `}
+        >
+          {cardInSlot && cardInSlot.card ? (
+            <div className="h-full flex items-center justify-center overflow-visible">
+              <div className={`h-full w-full flex flex-col p-2 bg-white dark:bg-gray-800 rounded-lg transition-transform shadow-lg ${cardInSlot.mode === CardMode.DEFENSE ? 'rotate-90 scale-90' : ''}`}>
+                <div className="text-xs font-bold truncate mb-1">{cardInSlot.card.name}</div>
+                <div className="flex-1 flex items-center justify-center">
+                  <img
+                    src={cardInSlot.card.imageUrl}
+                    alt={cardInSlot.card.name}
+                    className="w-full h-full object-cover rounded"
+                  />
+                </div>
+                <div className="mt-1 flex items-center justify-between text-xs">
+                  <span className="text-red-600 dark:text-red-400">⚔️{cardInSlot.card.attack}</span>
+                  <span className="text-blue-600 dark:text-blue-400">🛡️{cardInSlot.card.defense}</span>
+                </div>
+                <div className="text-xs text-center mt-1">
+                  {cardInSlot.mode === CardMode.ATTACK ? '⚔️ ATK' : '🛡️ DEF'}
+                </div>
+                {cardInSlot.hasActedThisTurn && (
+                  <div className="text-xs text-gray-500 text-center">Used</div>
+                )}
               </div>
-              <div className="mt-1 flex items-center justify-between text-xs">
-                <span className="text-red-600 dark:text-red-400">⚔️{cardInSlot.card.attack}</span>
-                <span className="text-blue-600 dark:text-blue-400">🛡️{cardInSlot.card.defense}</span>
-              </div>
-              <div className="text-xs text-center mt-1">
-                {cardInSlot.mode === CardMode.ATTACK ? '⚔️ ATK' : '🛡️ DEF'}
-              </div>
-              {cardInSlot.hasActedThisTurn && (
-                <div className="text-xs text-gray-500 text-center">Used</div>
-              )}
             </div>
+          ) : cardInSlot && !cardInSlot.card ? (
+            <div className="h-full flex items-center justify-center text-xs text-gray-500 dark:text-gray-400">
+              Loading...
+            </div>
+          ) : canPlace ? (
+            <div className="h-full flex items-center justify-center text-sm text-green-600 dark:text-green-400">
+              Place Here
+            </div>
+          ) : null}
+        </div>
+
+        {/* Action Popup - appears below selected card */}
+        {isSelected && isMyRow && isMyTurn && (
+          <div className="absolute top-full left-0 right-0 mt-1 z-10 p-2 bg-purple-100 dark:bg-purple-900/80 rounded-lg border-2 border-purple-500 shadow-lg">
+            <div className="flex flex-col gap-1">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  switchMode(selectedBoardCard.mode === CardMode.ATTACK ? CardMode.DEFENSE : CardMode.ATTACK);
+                }}
+                disabled={loading || selectedBoardCard.hasActedThisTurn}
+                className="px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {selectedBoardCard.mode === CardMode.ATTACK ? '🛡️ DEF' : '⚔️ ATK'}
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActionMode('attack');
+                }}
+                disabled={loading || selectedBoardCard.hasActedThisTurn}
+                className="px-2 py-1 bg-red-600 hover:bg-red-700 text-white text-xs rounded font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                ⚔️ Attack
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedBoardCard(null);
+                  setActionMode(null);
+                }}
+                className="px-2 py-1 bg-gray-600 hover:bg-gray-700 text-white text-xs rounded font-semibold"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Attack mode - show direct attack if no opponent cards */}
+            {actionMode === 'attack' && (() => {
+              const opponentRow = isPlayer1 ? 1 : 0;
+              const opponentCards = game.board?.filter(c => c.row === opponentRow) || [];
+              if (opponentCards.length === 0) {
+                return (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      attack();
+                    }}
+                    disabled={loading}
+                    className="mt-1 w-full px-2 py-1 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    🎯 Direct ({selectedBoardCard.card.attack})
+                  </button>
+                );
+              }
+              return (
+                <div className="mt-1 text-xs text-center text-gray-700 dark:text-gray-300">
+                  Click opponent card
+                </div>
+              );
+            })()}
           </div>
-        ) : cardInSlot && !cardInSlot.card ? (
-          <div className="h-full flex items-center justify-center text-xs text-gray-500 dark:text-gray-400">
-            Loading...
-          </div>
-        ) : canPlace ? (
-          <div className="h-full flex items-center justify-center text-sm text-green-600 dark:text-green-400">
-            Place Here
-          </div>
-        ) : null}
+        )}
       </div>
     );
   };
@@ -314,7 +381,7 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-[1600px] mx-auto px-4 py-8">
       {error && (
         <div className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-400 rounded-lg">
           {error}
@@ -348,156 +415,157 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
         </div>
       </div>
 
-      {/* Opponent's Board */}
-      <div className="mb-4">
-        <div className="flex items-center justify-between mb-2">
-          <div className="text-sm font-semibold text-gray-600 dark:text-gray-400">
-            Opponent's Field
-          </div>
-          <DeckDisplay deckSize={opponentDeckSize} label="Opponent's Deck" isOpponent />
-        </div>
-        <div className="grid grid-cols-5 gap-4 py-4">
-          {Array.from({ length: 5 }, (_, i) => renderBoardSlot(i, isPlayer1 ? 1 : 0))}
-        </div>
-      </div>
-
-      {/* My Board */}
-      <div className="mb-6">
-        <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">
-          Your Field
-        </div>
-        <div className="grid grid-cols-5 gap-4 py-4">
-          {Array.from({ length: 5 }, (_, i) => renderBoardSlot(i, isPlayer1 ? 0 : 1))}
-        </div>
-      </div>
-
-      {/* Selected Card Actions */}
-      {selectedBoardCard && isMyTurn && (
-        <div className="mb-6 p-4 bg-purple-100 dark:bg-purple-900/30 rounded-lg border-2 border-purple-500">
-          <div className="text-sm font-bold mb-2">Card Actions: {selectedBoardCard.card.name}</div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => switchMode(selectedBoardCard.mode === CardMode.ATTACK ? CardMode.DEFENSE : CardMode.ATTACK)}
-              disabled={loading || selectedBoardCard.hasActedThisTurn}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Switch to {selectedBoardCard.mode === CardMode.ATTACK ? 'Defense' : 'Attack'}
-            </button>
-            <button
-              onClick={() => setActionMode('attack')}
-              disabled={loading || selectedBoardCard.hasActedThisTurn}
-              className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Attack
-            </button>
-            <button
-              onClick={() => {
-                setSelectedBoardCard(null);
-                setActionMode(null);
-              }}
-              className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-semibold"
-            >
-              Cancel
-            </button>
-          </div>
-          {actionMode === 'attack' && (
-            <div className="mt-2">
-              <div className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                Click an opponent's card to attack
+      {/* Main 3-Column Layout */}
+      <div className="flex gap-4">
+        {/* LEFT COLUMN - Player's Hand (Vertical) */}
+        <div className="w-48 flex-shrink-0">
+          <div className="sticky top-4">
+            <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2 text-center">
+              Your Hand ({handCards.length})
+            </div>
+            {selectedCard && actionMode === 'place' && (
+              <div className="text-xs text-green-600 dark:text-green-400 mb-2 text-center">
+                Click a slot to place
               </div>
-              {(() => {
-                const opponentRow = isPlayer1 ? 1 : 0;
-                const opponentCards = game.board?.filter(c => c.row === opponentRow) || [];
-                if (opponentCards.length === 0) {
-                  return (
-                    <button
-                      onClick={() => attack()}
-                      disabled={loading}
-                      className="w-full px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg shadow transform transition hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      🎯 Attack Opponent Directly ({selectedBoardCard.card.attack} damage)
-                    </button>
-                  );
-                }
-                return null;
-              })()}
-            </div>
-          )}
-        </div>
-      )}
+            )}
+            <div className="flex flex-col gap-3 max-h-[calc(100vh-250px)] overflow-y-auto p-2 bg-gray-100 dark:bg-gray-800/50 rounded-lg">
+              {handCards.map((card) => (
+                <div key={card.id} className="relative">
+                  <div
+                    onClick={() => {
+                      if (isMyTurn) {
+                        setSelectedCard(card);
+                        setActionMode('place');
+                        setSelectedBoardCard(null);
+                      }
+                    }}
+                    className={`
+                      rounded-lg border-2 transition-all p-1 flex-shrink-0
+                      ${selectedCard?.id === card.id && actionMode === 'place' ? 'border-green-500 ring-2 ring-green-500' : 'border-gray-300 dark:border-gray-700'}
+                      ${isMyTurn ? 'cursor-pointer hover:border-green-400 hover:shadow-lg' : 'cursor-not-allowed opacity-50'}
+                    `}
+                  >
+                    <div className="flex flex-col bg-white dark:bg-gray-800 rounded">
+                      <div className="text-xs font-bold truncate px-1 py-0.5">{card.name}</div>
+                      <img
+                        src={card.imageUrl}
+                        alt={card.name}
+                        className="w-full h-32 object-cover rounded"
+                      />
+                      <div className="flex justify-between text-xs px-1 py-0.5">
+                        <span className="text-red-600 dark:text-red-400">⚔️{card.attack}</span>
+                        <span className="text-blue-600 dark:text-blue-400">🛡️{card.defense}</span>
+                      </div>
+                    </div>
+                  </div>
 
-      {/* My Hand */}
-      <div className="mb-6">
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-4">
-            <div className="text-sm font-semibold text-gray-600 dark:text-gray-400">
-              Your Hand ({handCards.length} cards) {selectedCard && actionMode === 'place' && <span className="text-green-600 dark:text-green-400">- Click a slot to place</span>}
-            </div>
-          </div>
-          <DeckDisplay deckSize={myDeckSize} label="Your Deck" />
-        </div>
-        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 max-h-48 overflow-y-auto p-2 bg-gray-100 dark:bg-gray-800/50 rounded-lg">
-          {handCards.map((card) => (
-            <div
-              key={card.id}
-              onClick={() => {
-                if (isMyTurn) {
-                  setSelectedCard(card);
-                  setActionMode('place');
-                  setSelectedBoardCard(null);
-                }
-              }}
-              className={`
-                aspect-[2/3] rounded-lg border-2 transition-all p-1
-                ${selectedCard?.id === card.id && actionMode === 'place' ? 'border-green-500 ring-2 ring-green-500' : 'border-gray-300 dark:border-gray-700'}
-                ${isMyTurn ? 'cursor-pointer hover:border-green-400' : 'cursor-not-allowed opacity-50'}
-              `}
-            >
-              <div className="h-full flex flex-col bg-white dark:bg-gray-800 rounded">
-                <div className="text-xs font-bold truncate px-1">{card.name}</div>
-                <img
-                  src={card.imageUrl}
-                  alt={card.name}
-                  className="flex-1 w-full object-cover rounded"
-                />
-                <div className="flex justify-between text-xs px-1">
-                  <span className="text-red-600 dark:text-red-400">⚔️{card.attack}</span>
-                  <span className="text-blue-600 dark:text-blue-400">🛡️{card.defense}</span>
+                  {/* Mode Selection Popup */}
+                  {selectedCard?.id === card.id && actionMode === 'place' && isMyTurn && (
+                    <div className="mt-1 p-1 bg-purple-100 dark:bg-purple-900/50 rounded border border-purple-500">
+                      <div className="text-xs font-semibold mb-1 text-center text-gray-700 dark:text-gray-300">Mode:</div>
+                      <div className="flex gap-1">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setPlacementMode(CardMode.ATTACK);
+                          }}
+                          className={`flex-1 px-2 py-1 rounded text-xs font-semibold transition ${
+                            placementMode === CardMode.ATTACK
+                              ? 'bg-red-600 text-white'
+                              : 'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-500 hover:text-white'
+                          }`}
+                        >
+                          ⚔️ ATK
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setPlacementMode(CardMode.DEFENSE);
+                          }}
+                          className={`flex-1 px-2 py-1 rounded text-xs font-semibold transition ${
+                            placementMode === CardMode.DEFENSE
+                              ? 'bg-blue-600 text-white'
+                              : 'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-blue-500 hover:text-white'
+                          }`}
+                        >
+                          🛡️ DEF
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
+            <div className="mt-3 flex justify-center">
+              <DeckDisplay deckSize={myDeckSize} label="Your Deck" />
+            </div>
+          </div>
         </div>
-      </div>
 
-      {/* Actions */}
-      <div className="flex gap-4 justify-center">
-        <button
-          onClick={endTurn}
-          disabled={!isMyTurn || loading}
-          className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold rounded-lg shadow-lg transform transition hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-        >
-          {loading ? 'Processing...' : 'End Turn'}
-        </button>
-        <button
-          onClick={onRefresh}
-          className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg transform transition hover:scale-105"
-        >
-          Refresh
-        </button>
-        <button
-          onClick={forfeitGame}
-          disabled={loading}
-          className="px-6 py-3 bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-lg shadow-lg transform transition hover:scale-105"
-        >
-          Forfeit
-        </button>
-        <button
-          onClick={onExit}
-          className="px-8 py-3 bg-gray-600 hover:bg-gray-700 text-white font-bold rounded-lg shadow-lg transform transition hover:scale-105"
-        >
-          Exit
-        </button>
+        {/* CENTER COLUMN - Game Board & Controls */}
+        <div className="flex-1 min-w-0">
+          {/* Opponent's Board */}
+          <div className="mb-4">
+            <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">
+              Opponent's Field
+            </div>
+            <div className="grid grid-cols-5 gap-3 py-4">
+              {Array.from({ length: 5 }, (_, i) => renderBoardSlot(i, isPlayer1 ? 1 : 0))}
+            </div>
+          </div>
+
+          {/* My Board */}
+          <div className="mb-6">
+            <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">
+              Your Field
+            </div>
+            <div className="grid grid-cols-5 gap-3 py-4">
+              {Array.from({ length: 5 }, (_, i) => renderBoardSlot(i, isPlayer1 ? 0 : 1))}
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex gap-4 justify-center">
+            <button
+              onClick={endTurn}
+              disabled={!isMyTurn || loading}
+              className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold rounded-lg shadow-lg transform transition hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            >
+              {loading ? 'Processing...' : 'End Turn'}
+            </button>
+            <button
+              onClick={onRefresh}
+              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg transform transition hover:scale-105"
+            >
+              Refresh
+            </button>
+            <button
+              onClick={forfeitGame}
+              disabled={loading}
+              className="px-6 py-3 bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-lg shadow-lg transform transition hover:scale-105"
+            >
+              Forfeit
+            </button>
+            <button
+              onClick={onExit}
+              className="px-8 py-3 bg-gray-600 hover:bg-gray-700 text-white font-bold rounded-lg shadow-lg transform transition hover:scale-105"
+            >
+              Exit
+            </button>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN - Opponent's Deck */}
+        <div className="w-48 flex-shrink-0">
+          <div className="sticky top-4">
+            <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2 text-center">
+              Opponent
+            </div>
+            <div className="flex justify-center">
+              <DeckDisplay deckSize={opponentDeckSize} label="Opponent's Deck" isOpponent />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

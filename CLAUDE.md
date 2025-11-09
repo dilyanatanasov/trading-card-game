@@ -18,7 +18,7 @@ A simple trading card app where users receive a card each day and can gift, trad
 - Daily card distribution (automatic at midnight)
 - Manual daily card claim (GET /cards/daily/claim for testing)
 - Add cards to collection (POST /cards/add-to-collection/:cardId for testing)
-- New users receive 3 random starter cards upon registration
+- New users receive 30 random starter cards upon registration
 - Sell cards in marketplace (directly from collection page)
 - Gift cards to other users (full send/receive/claim workflow)
 - Trade cards with friends (create trades, accept/reject, view history)
@@ -35,6 +35,12 @@ A simple trading card app where users receive a card each day and can gift, trad
   - Create/join game lobbies
   - Auto-end turn after actions
   - **Real-time updates**: WebSocket-powered instant synchronization between players (no polling)
+  - **Deck system**:
+    - Players' collections are shuffled into a deck when joining a game (max 3 copies per card)
+    - Each player starts with 5 cards in hand
+    - Players draw 1 card automatically at the start of their turn
+    - Cards can only be placed from hand
+    - Visual deck display showing remaining cards
 - Dark mode toggle with localStorage persistence
 - Epic fantasy-themed UI with gradient backgrounds and glow effects
 

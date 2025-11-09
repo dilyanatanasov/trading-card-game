@@ -24,8 +24,8 @@ export class GameController {
   }
 
   @Get('available')
-  getAvailableGames() {
-    return this.gameService.getAvailableGames();
+  getAvailableGames(@Request() req) {
+    return this.gameService.getAvailableGames(req.user.userId);
   }
 
   @Get('my-games')

@@ -3,6 +3,7 @@ import { Game, GameCard, Card, CardMode, GameStatus } from '../types';
 import { gameAPI, cardsAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { gameSocket } from '../services/socket';
+import DeckDisplay from './DeckDisplay';
 
 interface GameBoardProps {
   game: Game;
@@ -13,7 +14,7 @@ interface GameBoardProps {
 export default function GameBoard({ game: initialGame, onRefresh, onExit }: GameBoardProps) {
   const { user } = useAuth();
   const [game, setGame] = useState<Game>(initialGame);
-  const [myCards, setMyCards] = useState<Card[]>([]);
+  const [handCards, setHandCards] = useState<Card[]>([]);
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [selectedBoardCard, setSelectedBoardCard] = useState<GameCard | null>(null);
   const [actionMode, setActionMode] = useState<'place' | 'attack' | 'switch' | null>(null);
@@ -25,13 +26,16 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
   const myHealth = isPlayer1 ? game.player1Health : game.player2Health;
   const opponentHealth = isPlayer1 ? game.player2Health : game.player1Health;
   const opponent = isPlayer1 ? game.player2 : game.player1;
+  const myDeckSize = isPlayer1 ? (game.player1Deck?.length || 0) : (game.player2Deck?.length || 0);
+  const opponentDeckSize = isPlayer1 ? (game.player2Deck?.length || 0) : (game.player1Deck?.length || 0);
+  const myHandCardIds = isPlayer1 ? (game.player1Hand || []) : (game.player2Hand || []);
 
   useEffect(() => {
     setGame(initialGame);
   }, [initialGame]);
 
   useEffect(() => {
-    loadMyCards();
+    loadHandCards();
 
     // Subscribe to real-time game updates
     const handleGameUpdate = (updatedGame: Game) => {
@@ -52,13 +56,27 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
     };
   }, [game.id, user?.id]);
 
-  const loadMyCards = async () => {
+  // Load cards when hand card IDs change
+  useEffect(() => {
+    loadHandCards();
+  }, [myHandCardIds.length]);
+
+  const loadHandCards = async () => {
     try {
-      const response = await cardsAPI.getMyCollection();
-      const uniqueCards = response.data.map(uc => uc.card);
-      setMyCards(uniqueCards);
+      if (myHandCardIds.length === 0) {
+        setHandCards([]);
+        return;
+      }
+
+      // Fetch the actual card data for cards in hand
+      const cardPromises = myHandCardIds.map(cardId =>
+        cardsAPI.getOne(cardId).catch(() => null)
+      );
+      const cards = await Promise.all(cardPromises);
+      const validCards = cards.filter((c): c is { data: Card } => c !== null).map(c => c.data);
+      setHandCards(validCards);
     } catch (err: any) {
-      setError('Failed to load cards');
+      setError('Failed to load hand cards');
     }
   };
 
@@ -332,8 +350,11 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
 
       {/* Opponent's Board */}
       <div className="mb-4">
-        <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">
-          Opponent's Field
+        <div className="flex items-center justify-between mb-2">
+          <div className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+            Opponent's Field
+          </div>
+          <DeckDisplay deckSize={opponentDeckSize} label="Opponent's Deck" isOpponent />
         </div>
         <div className="grid grid-cols-5 gap-4 py-4">
           {Array.from({ length: 5 }, (_, i) => renderBoardSlot(i, isPlayer1 ? 1 : 0))}
@@ -408,12 +429,15 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
       {/* My Hand */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-2">
-          <div className="text-sm font-semibold text-gray-600 dark:text-gray-400">
-            Your Cards {selectedCard && actionMode === 'place' && <span className="text-green-600 dark:text-green-400">- Click a slot to place</span>}
+          <div className="flex items-center gap-4">
+            <div className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+              Your Hand ({handCards.length} cards) {selectedCard && actionMode === 'place' && <span className="text-green-600 dark:text-green-400">- Click a slot to place</span>}
+            </div>
           </div>
+          <DeckDisplay deckSize={myDeckSize} label="Your Deck" />
         </div>
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 max-h-48 overflow-y-auto p-2 bg-gray-100 dark:bg-gray-800/50 rounded-lg">
-          {myCards.map((card) => (
+          {handCards.map((card) => (
             <div
               key={card.id}
               onClick={() => {

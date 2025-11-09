@@ -132,6 +132,10 @@ export interface Game {
   winnerId?: string;
   winner?: User;
   board: GameCard[];
+  player1Deck?: string[];
+  player2Deck?: string[];
+  player1Hand?: string[];
+  player2Hand?: string[];
   createdAt: string;
   updatedAt: string;
 }

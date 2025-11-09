@@ -28,14 +28,26 @@ export class GameService {
   ) {}
 
   async createGame(userId: string, createGameDto: CreateGameDto): Promise<Game> {
+    // Initialize player1's deck from their cards
+    const player1Deck = await this.initializePlayerDeck(userId);
+
     const game = this.gameRepository.create({
       player1Id: userId,
       player2Id: createGameDto.player2Id,
       currentTurnPlayerId: userId,
       status: createGameDto.player2Id ? GameStatus.IN_PROGRESS : GameStatus.WAITING,
+      player1Deck,
+      player1Hand: [],
     });
 
-    return this.gameRepository.save(game);
+    const savedGame = await this.gameRepository.save(game);
+
+    // Draw initial hand for player1 (5 cards)
+    if (player1Deck.length > 0) {
+      await this.drawCards(savedGame.id, userId, 5);
+    }
+
+    return this.getGame(savedGame.id);
   }
 
   async joinGame(gameId: string, userId: string): Promise<Game> {
@@ -53,11 +65,28 @@ export class GameService {
       throw new BadRequestException('You are already in this game');
     }
 
+    // Initialize player2's deck
+    const player2Deck = await this.initializePlayerDeck(userId);
+
+    // Check if player has cards to play
+    if (player2Deck.length === 0) {
+      throw new BadRequestException('You need at least one card in your collection to join a battle. Claim your daily card first!');
+    }
+
     game.player2Id = userId;
     game.status = GameStatus.IN_PROGRESS;
     game.currentTurnPlayerId = game.player1Id;
+    game.player2Deck = player2Deck;
+    game.player2Hand = [];
 
-    return this.gameRepository.save(game);
+    await this.gameRepository.save(game);
+
+    // Draw initial hand for player2 (5 cards)
+    if (player2Deck.length > 0) {
+      await this.drawCards(gameId, userId, 5);
+    }
+
+    return this.getGame(gameId);
   }
 
   async getGame(gameId: string): Promise<Game> {
@@ -85,6 +114,14 @@ export class GameService {
       throw new ForbiddenException('Not your turn');
     }
 
+    // Check if card is in player's hand
+    const isPlayer1 = game.player1Id === userId;
+    const hand = isPlayer1 ? game.player1Hand || [] : game.player2Hand || [];
+
+    if (!hand.includes(placeCardDto.cardId)) {
+      throw new BadRequestException('Card is not in your hand');
+    }
+
     // Check if position is already occupied
     const row = userId === game.player1Id ? 0 : 1;
     const existingCard = await this.gameCardRepository.findOne({
@@ -99,17 +136,17 @@ export class GameService {
       throw new BadRequestException('Position already occupied');
     }
 
-    // Verify user owns the card
-    const userCard = await this.userCardRepository.findOne({
-      where: {
-        userId,
-        cardId: placeCardDto.cardId,
-      },
-    });
+    // Remove card from hand
+    const cardIndex = hand.indexOf(placeCardDto.cardId);
+    hand.splice(cardIndex, 1);
 
-    if (!userCard || userCard.quantity < 1) {
-      throw new BadRequestException('You do not own this card');
+    if (isPlayer1) {
+      game.player1Hand = hand;
+    } else {
+      game.player2Hand = hand;
     }
+
+    await this.gameRepository.save(game);
 
     // Place the card
     const gameCard = this.gameCardRepository.create({
@@ -332,6 +369,9 @@ export class GameService {
 
     await this.gameRepository.save(game);
 
+    // Draw a card for the new turn player
+    await this.drawCards(gameId, game.currentTurnPlayerId, 1);
+
     return this.getGame(gameId);
   }
 
@@ -393,11 +433,15 @@ export class GameService {
     return record;
   }
 
-  async getAvailableGames(): Promise<Game[]> {
-    return this.gameRepository.find({
+  async getAvailableGames(userId: string): Promise<Game[]> {
+    // Get all waiting games, but we'll filter out the user's own games
+    const allWaitingGames = await this.gameRepository.find({
       where: { status: GameStatus.WAITING },
       relations: ['player1'],
     });
+
+    // Exclude games created by the current user
+    return allWaitingGames.filter(game => game.player1Id !== userId);
   }
 
   async getMyGames(userId: string): Promise<Game[]> {
@@ -411,5 +455,62 @@ export class GameService {
       relations: ['player1', 'player2', 'board', 'board.card'],
       order: { updatedAt: 'DESC' },
     });
+  }
+
+  // Initialize a player's deck from their card collection
+  private async initializePlayerDeck(userId: string): Promise<string[]> {
+    const userCards = await this.userCardRepository.find({
+      where: { userId },
+      relations: ['card'],
+    });
+
+    const deck: string[] = [];
+
+    // Add each card to deck based on quantity (up to 3 copies per card)
+    for (const userCard of userCards) {
+      const copiesToAdd = Math.min(userCard.quantity, 3); // Max 3 copies
+      for (let i = 0; i < copiesToAdd; i++) {
+        deck.push(userCard.cardId);
+      }
+    }
+
+    // Shuffle the deck
+    for (let i = deck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+
+    return deck;
+  }
+
+  // Draw cards from deck to hand
+  async drawCards(gameId: string, userId: string, count: number = 1): Promise<Game> {
+    const game = await this.gameRepository.findOne({ where: { id: gameId } });
+
+    if (!game) {
+      throw new NotFoundException('Game not found');
+    }
+
+    const isPlayer1 = game.player1Id === userId;
+    const deck = isPlayer1 ? game.player1Deck || [] : game.player2Deck || [];
+    const hand = isPlayer1 ? game.player1Hand || [] : game.player2Hand || [];
+
+    // Draw cards up to the requested count or until deck is empty
+    const cardsToDraw = Math.min(count, deck.length);
+    const drawnCards = deck.splice(0, cardsToDraw);
+    hand.push(...drawnCards);
+
+    // Update game
+    if (isPlayer1) {
+      game.player1Deck = deck;
+      game.player1Hand = hand;
+    } else {
+      game.player2Deck = deck;
+      game.player2Hand = hand;
+    }
+
+    await this.gameRepository.save(game);
+
+    return this.getGame(gameId);
   }
 }

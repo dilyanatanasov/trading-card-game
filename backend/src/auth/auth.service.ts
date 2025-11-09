@@ -43,9 +43,9 @@ export class AuthService {
       password: hashedPassword,
     });
 
-    // Give new users 3 starter cards
+    // Give new users 30 starter cards
     try {
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 30; i++) {
         const randomCard = await this.cardsService.getRandomCard();
         await this.cardsService.addCardToUser(user.id, randomCard.id);
       }

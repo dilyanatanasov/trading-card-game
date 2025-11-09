@@ -62,6 +62,20 @@ export class Game {
   @OneToMany(() => GameCard, (gameCard) => gameCard.game)
   board: GameCard[];
 
+  // Deck system: JSON array of card IDs for each player
+  @Column({ type: 'jsonb', nullable: true })
+  player1Deck: string[];
+
+  @Column({ type: 'jsonb', nullable: true })
+  player2Deck: string[];
+
+  // Hand system: JSON array of card IDs currently in each player's hand
+  @Column({ type: 'jsonb', default: [] })
+  player1Hand: string[];
+
+  @Column({ type: 'jsonb', default: [] })
+  player2Hand: string[];
+
   @CreateDateColumn()
   createdAt: Date;
 

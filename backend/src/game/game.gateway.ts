@@ -195,4 +195,26 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
       return { success: false, error: error.message };
     }
   }
+
+  @SubscribeMessage('drawCard')
+  async handleDrawCard(
+    @MessageBody() data: { gameId: string; count?: number },
+    @ConnectedSocket() client: Socket,
+  ) {
+    const userId = client.data.userId;
+    try {
+      const game = await this.gameService.drawCards(
+        data.gameId,
+        userId,
+        data.count || 1,
+      );
+
+      // Notify all players in the game
+      this.server.to(`game:${data.gameId}`).emit('gameUpdated', game);
+
+      return { success: true, game };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  }
 }

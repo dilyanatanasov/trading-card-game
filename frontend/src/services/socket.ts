@@ -163,6 +163,19 @@ class GameSocketService {
     });
   }
 
+  drawCard(gameId: string, count: number = 1): Promise<{ success: boolean; game?: Game; error?: string }> {
+    return new Promise((resolve) => {
+      if (!this.socket?.connected) {
+        resolve({ success: false, error: 'Not connected' });
+        return;
+      }
+
+      this.socket.emit('drawCard', { gameId, count }, (response: any) => {
+        resolve(response);
+      });
+    });
+  }
+
   isConnected(): boolean {
     return this.socket?.connected || false;
   }

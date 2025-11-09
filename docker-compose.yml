@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: trading-card-db
+    environment:
+      POSTGRES_USER: ${DB_USER:-carduser}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-cardpass}
+      POSTGRES_DB: ${DB_NAME:-trading_cards}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - trading-card-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: trading-card-backend
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: ${DB_USER:-carduser}
+      DB_PASSWORD: ${DB_PASSWORD:-cardpass}
+      DB_NAME: ${DB_NAME:-trading_cards}
+      JWT_SECRET: ${JWT_SECRET:-your-secret-key-change-in-production}
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - trading-card-network
+    command: npm run start:dev
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: trading-card-frontend
+    environment:
+      VITE_API_URL: http://localhost:3000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - trading-card-network
+    command: npm run dev -- --host
+
+volumes:
+  postgres_data:
+
+networks:
+  trading-card-network:
+    driver: bridge

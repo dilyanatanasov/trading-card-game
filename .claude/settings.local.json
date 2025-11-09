@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ren:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(docker-compose logs:*)",
+      "Bash(docker-compose down:*)",
+      "Bash(docker-compose build:*)",
+      "Bash(docker-compose ps:*)",
+      "Bash(node seed-cards.js:*)",
+      "Bash(npm install:*)",
+      "Bash(curl:*)",
+      "Bash(node give-cards-to-admin.js:*)",
+      "Bash(docker-compose restart:*)",
+      "Bash(node claim-daily-card.js:*)",
+      "Bash(for:*)",
+      "Bash(do echo \"Claiming card $i...\")",
+      "Bash(done)",
+      "Bash(docker exec:*)",
+      "Bash(npx nest generate:*)",
+      "Bash(dir:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm run start:dev:*)",
+      "Bash(cat:*)",
+      "Bash(xargs kill:*)",
+      "Bash(DB_HOST=localhost npm run start:dev)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(timeout 10 docker-compose logs:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Trading Card Game App\n\nA full-stack trading card application with real-time battle system.\n\nFeatures:\n- Daily card distribution system\n- Card collection and marketplace\n- Gift and trade system with friends\n- Real-time card battles with WebSocket\n- Attack/defense card mechanics\n- Dark mode support\n- Epic fantasy-themed UI\n\nTech Stack:\n- Frontend: React + TypeScript + Vite + Tailwind CSS\n- Backend: NestJS + TypeORM + PostgreSQL\n- Real-time: Socket.IO\n- Containerization: Docker + Docker Compose\n\n🤖 Generated with Claude Code (https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

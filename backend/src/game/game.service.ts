@@ -394,6 +394,12 @@ export class GameService {
     player1Id: string,
     player2Id: string,
   ): Promise<void> {
+    // Validate that we have valid player IDs
+    if (!winnerId || !player1Id || !player2Id) {
+      console.error('Cannot update game records: missing player IDs', { winnerId, player1Id, player2Id });
+      return;
+    }
+
     const loserId = winnerId === player1Id ? player2Id : player1Id;
 
     // Update winner record

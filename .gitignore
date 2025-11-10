@@ -33,3 +33,6 @@ postgres_data/
 # Logs
 logs/
 *.log
+
+# Card images (too large for git)
+backend/public/card-images/

@@ -402,11 +402,16 @@ export class GameService {
     });
 
     if (!winnerRecord) {
-      winnerRecord = this.gameRecordRepository.create({ userId: winnerId });
+      winnerRecord = this.gameRecordRepository.create({
+        userId: winnerId,
+        wins: 0,
+        losses: 0,
+        totalGames: 0,
+      });
     }
 
-    winnerRecord.wins += 1;
-    winnerRecord.totalGames += 1;
+    winnerRecord.wins = (winnerRecord.wins || 0) + 1;
+    winnerRecord.totalGames = (winnerRecord.totalGames || 0) + 1;
     await this.gameRecordRepository.save(winnerRecord);
 
     // Update loser record
@@ -415,11 +420,16 @@ export class GameService {
     });
 
     if (!loserRecord) {
-      loserRecord = this.gameRecordRepository.create({ userId: loserId });
+      loserRecord = this.gameRecordRepository.create({
+        userId: loserId,
+        wins: 0,
+        losses: 0,
+        totalGames: 0,
+      });
     }
 
-    loserRecord.losses += 1;
-    loserRecord.totalGames += 1;
+    loserRecord.losses = (loserRecord.losses || 0) + 1;
+    loserRecord.totalGames = (loserRecord.totalGames || 0) + 1;
     await this.gameRecordRepository.save(loserRecord);
   }
 

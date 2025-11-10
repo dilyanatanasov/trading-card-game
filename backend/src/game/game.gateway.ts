@@ -85,7 +85,7 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   @SubscribeMessage('placeCard')
   async handlePlaceCard(
-    @MessageBody() data: { gameId: string; cardId: string; position: number },
+    @MessageBody() data: { gameId: string; cardId: string; position: number; mode?: string },
     @ConnectedSocket() client: Socket,
   ) {
     const userId = client.data.userId;
@@ -93,6 +93,7 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
       const game = await this.gameService.placeCard(data.gameId, userId, {
         cardId: data.cardId,
         position: data.position,
+        mode: data.mode as any,
       });
 
       // Notify all players in the game

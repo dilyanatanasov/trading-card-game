@@ -485,12 +485,9 @@ export class GameService {
 
     const deck: string[] = [];
 
-    // Add each card to deck based on quantity (up to 3 copies per card)
+    // Add each UNIQUE card to deck (only 1 copy per card)
     for (const userCard of userCards) {
-      const copiesToAdd = Math.min(userCard.quantity, 3); // Max 3 copies
-      for (let i = 0; i < copiesToAdd; i++) {
-        deck.push(userCard.cardId);
-      }
+      deck.push(userCard.cardId);
     }
 
     // Shuffle the deck

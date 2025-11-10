@@ -43,15 +43,12 @@ export class AuthService {
       password: hashedPassword,
     });
 
-    // Give new users 30 starter cards
+    // Give new users a complete race-themed deck (8 unique cards from one race)
     try {
-      for (let i = 0; i < 30; i++) {
-        const randomCard = await this.cardsService.getRandomCard();
-        await this.cardsService.addCardToUser(user.id, randomCard.id);
-      }
+      await this.cardsService.giveUserRaceDeck(user.id);
     } catch (error) {
       // If no cards available yet, that's okay
-      console.log('No cards available for new user starter pack');
+      console.log('No cards available for new user starter pack:', error.message);
     }
 
     return this.login(user);

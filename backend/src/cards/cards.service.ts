@@ -88,6 +88,27 @@ export class CardsService {
     await this.addCardToUser(toUserId, cardId);
   }
 
+  async getCardsByCategory(category: string): Promise<Card[]> {
+    return this.cardsRepository.find({
+      where: { category },
+      order: { createdAt: 'ASC' },
+    });
+  }
+
+  async getRandomRaceDeck(): Promise<Card[]> {
+    const races = ['Dragons', 'Aqua', 'Dark', 'Holy'];
+    const randomRace = races[Math.floor(Math.random() * races.length)];
+    return this.getCardsByCategory(randomRace);
+  }
+
+  async giveUserRaceDeck(userId: string): Promise<void> {
+    const raceDeck = await this.getRandomRaceDeck();
+
+    for (const card of raceDeck) {
+      await this.addCardToUser(userId, card.id);
+    }
+  }
+
   async getRandomCard(): Promise<Card> {
     const cards = await this.cardsRepository.find();
     if (cards.length === 0) {

@@ -18,7 +18,9 @@ A simple trading card app where users receive a card each day and can gift, trad
 - Daily card distribution (automatic at midnight)
 - Manual daily card claim (GET /cards/daily/claim for testing)
 - Add cards to collection (POST /cards/add-to-collection/:cardId for testing)
-- New users receive 30 random starter cards upon registration
+- **Race-based card system**: 4 races (Dragons, Aqua, Dark, Holy)
+- New users receive a complete themed deck (8 unique cards from one random race)
+- Each race includes a legendary "game changer" card with 3000+ attack points
 - Sell cards in marketplace (directly from collection page)
 - Gift cards to other users (full send/receive/claim workflow)
 - Trade cards with friends (create trades, accept/reject, view history)

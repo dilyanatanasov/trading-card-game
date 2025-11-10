@@ -34,5 +34,7 @@ postgres_data/
 logs/
 *.log
 
-# Card images (too large for git)
+# Card images (too large for git - uncompressed)
 backend/public/card-images/
+# Allow compressed archive
+!backend/public/card-images.tar.gz

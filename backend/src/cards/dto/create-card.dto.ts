@@ -23,6 +23,14 @@ export class CreateCardDto {
   @IsNumber()
   baseValue: number;
 
+  @ApiProperty({ example: 1500 })
+  @IsNumber()
+  attack: number;
+
+  @ApiProperty({ example: 1200 })
+  @IsNumber()
+  defense: number;
+
   @ApiProperty({ example: 'Fantasy', required: false })
   @IsOptional()
   @IsString()

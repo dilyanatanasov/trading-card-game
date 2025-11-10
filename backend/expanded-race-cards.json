@@ -1,0 +1,1205 @@
+[
+  {
+    "name": "Ancient Dragon King",
+    "description": "The supreme ruler of all dragons, wielding devastating fire power",
+    "imageUrl": "https://image.pollinations.ai/prompt/majestic%20ancient%20dragon%20king%20breathing%20fire%20epic%20fantasy%20art?width=400&height=600&nologo=true&model=flux",
+    "rarity": "legendary",
+    "category": "Dragons",
+    "attack": 3500,
+    "defense": 3200,
+    "baseValue": 5000
+  },
+  {
+    "name": "Fire Dragon Warrior",
+    "description": "Elite dragon warrior with mastery over flames",
+    "imageUrl": "https://image.pollinations.ai/prompt/fierce%20red%20fire%20dragon%20warrior%20epic%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "epic",
+    "category": "Dragons",
+    "attack": 2800,
+    "defense": 2400,
+    "baseValue": 3000
+  },
+  {
+    "name": "Sky Dragon Guardian",
+    "description": "Protector of the skies with lightning breath",
+    "imageUrl": "https://image.pollinations.ai/prompt/blue%20sky%20dragon%20with%20lightning%20wings%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "epic",
+    "category": "Dragons",
+    "attack": 2600,
+    "defense": 2500,
+    "baseValue": 2800
+  },
+  {
+    "name": "Volcanic Dragon",
+    "description": "Dragon born from the heart of a volcano",
+    "imageUrl": "https://image.pollinations.ai/prompt/volcanic%20dragon%20with%20lava%20scales%20epic%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "epic",
+    "category": "Dragons",
+    "attack": 2700,
+    "defense": 2300,
+    "baseValue": 2900
+  },
+  {
+    "name": "Earth Dragon Behemoth",
+    "description": "Massive earth dragon with impenetrable scales",
+    "imageUrl": "https://image.pollinations.ai/prompt/giant%20earth%20dragon%20with%20rock%20armor%20fantasy%20art?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Dragons",
+    "attack": 2200,
+    "defense": 2800,
+    "baseValue": 2000
+  },
+  {
+    "name": "Wind Dragon Scout",
+    "description": "Swift dragon with incredible agility",
+    "imageUrl": "https://image.pollinations.ai/prompt/white%20wind%20dragon%20flying%20fast%20fantasy%20art?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Dragons",
+    "attack": 2400,
+    "defense": 2000,
+    "baseValue": 1800
+  },
+  {
+    "name": "Ice Dragon",
+    "description": "Frost dragon with freezing breath",
+    "imageUrl": "https://image.pollinations.ai/prompt/ice%20dragon%20with%20frost%20breath%20frozen%20scales?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Dragons",
+    "attack": 2300,
+    "defense": 2200,
+    "baseValue": 1900
+  },
+  {
+    "name": "Thunder Dragon",
+    "description": "Storm dragon wielding lightning",
+    "imageUrl": "https://image.pollinations.ai/prompt/thunder%20dragon%20with%20lightning%20storm%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Dragons",
+    "attack": 2350,
+    "defense": 2100,
+    "baseValue": 1950
+  },
+  {
+    "name": "Shadow Dragon",
+    "description": "Dragon that lurks in darkness",
+    "imageUrl": "https://image.pollinations.ai/prompt/shadow%20dragon%20dark%20mist%20wings%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Dragons",
+    "attack": 2250,
+    "defense": 2150,
+    "baseValue": 1850
+  },
+  {
+    "name": "Crystal Dragon",
+    "description": "Dragon with crystalline armor",
+    "imageUrl": "https://image.pollinations.ai/prompt/crystal%20dragon%20with%20gem%20scales%20shining%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Dragons",
+    "attack": 2150,
+    "defense": 2400,
+    "baseValue": 1900
+  },
+  {
+    "name": "Dragon Hatchling",
+    "description": "Young dragon still learning to fly",
+    "imageUrl": "https://image.pollinations.ai/prompt/cute%20baby%20dragon%20hatchling%20fantasy%20art?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Dragons",
+    "attack": 1400,
+    "defense": 1300,
+    "baseValue": 500
+  },
+  {
+    "name": "Dragon Knight",
+    "description": "Human knight bonded with a dragon",
+    "imageUrl": "https://image.pollinations.ai/prompt/armored%20knight%20riding%20dragon%20epic%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Dragons",
+    "attack": 1500,
+    "defense": 1600,
+    "baseValue": 600
+  },
+  {
+    "name": "Dragon Mage",
+    "description": "Sorcerer who harnesses dragon magic",
+    "imageUrl": "https://image.pollinations.ai/prompt/dragon%20mage%20with%20fire%20staff%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Dragons",
+    "attack": 1550,
+    "defense": 1350,
+    "baseValue": 550
+  },
+  {
+    "name": "Dragon Rider",
+    "description": "Elite warrior riding a battle dragon",
+    "imageUrl": "https://image.pollinations.ai/prompt/dragon%20rider%20warrior%20epic%20battle%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Dragons",
+    "attack": 1600,
+    "defense": 1400,
+    "baseValue": 600
+  },
+  {
+    "name": "Dragon Tamer",
+    "description": "One who bonds with wild dragons",
+    "imageUrl": "https://image.pollinations.ai/prompt/dragon%20tamer%20with%20baby%20dragons%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Dragons",
+    "attack": 1450,
+    "defense": 1500,
+    "baseValue": 550
+  },
+  {
+    "name": "Dragon Egg Guardian",
+    "description": "Protector of dragon eggs",
+    "imageUrl": "https://image.pollinations.ai/prompt/guardian%20protecting%20dragon%20eggs%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Dragons",
+    "attack": 1350,
+    "defense": 1700,
+    "baseValue": 600
+  },
+  {
+    "name": "Dragon Priest",
+    "description": "Mystical priest who channels dragon magic",
+    "imageUrl": "https://image.pollinations.ai/prompt/robed%20priest%20with%20dragon%20staff%20fantasy%20art?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 1100,
+    "defense": 1400,
+    "baseValue": 300
+  },
+  {
+    "name": "Dragon Disciple",
+    "description": "Apprentice learning dragon ways",
+    "imageUrl": "https://image.pollinations.ai/prompt/young%20apprentice%20with%20dragon%20scroll%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 1000,
+    "defense": 1200,
+    "baseValue": 250
+  },
+  {
+    "name": "Dragon Scout",
+    "description": "Swift scout of dragon territories",
+    "imageUrl": "https://image.pollinations.ai/prompt/scout%20with%20dragon%20companion%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 1150,
+    "defense": 1100,
+    "baseValue": 300
+  },
+  {
+    "name": "Dragon Cultist",
+    "description": "Follower of ancient dragon worship",
+    "imageUrl": "https://image.pollinations.ai/prompt/cultist%20worshipping%20dragon%20idol%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 1050,
+    "defense": 1300,
+    "baseValue": 280
+  },
+  {
+    "name": "Dragonborn Warrior",
+    "description": "Humanoid with dragon bloodline",
+    "imageUrl": "https://image.pollinations.ai/prompt/dragonborn%20warrior%20with%20scales%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 1200,
+    "defense": 1250,
+    "baseValue": 320
+  },
+  {
+    "name": "Dragon Sage",
+    "description": "Wise keeper of dragon lore",
+    "imageUrl": "https://image.pollinations.ai/prompt/old%20sage%20with%20dragon%20wisdom%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 950,
+    "defense": 1350,
+    "baseValue": 290
+  },
+  {
+    "name": "Dragon Wyrmling",
+    "description": "Tiny dragon just hatched",
+    "imageUrl": "https://image.pollinations.ai/prompt/tiny%20baby%20dragon%20wyrmling%20cute%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 900,
+    "defense": 1000,
+    "baseValue": 200
+  },
+  {
+    "name": "Fire Breath Initiate",
+    "description": "Training to breathe fire like dragons",
+    "imageUrl": "https://image.pollinations.ai/prompt/warrior%20breathing%20small%20flames%20training%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 1100,
+    "defense": 1150,
+    "baseValue": 270
+  },
+  {
+    "name": "Dragon Scale Armor",
+    "description": "Warrior wearing dragon scales",
+    "imageUrl": "https://image.pollinations.ai/prompt/warrior%20in%20dragon%20scale%20armor%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 1050,
+    "defense": 1450,
+    "baseValue": 310
+  },
+  {
+    "name": "Drake Handler",
+    "description": "Handler of smaller drakes",
+    "imageUrl": "https://image.pollinations.ai/prompt/handler%20with%20small%20drake%20creatures%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 1000,
+    "defense": 1300,
+    "baseValue": 260
+  },
+  {
+    "name": "Dragon Claw Fighter",
+    "description": "Fighter wielding dragon claw weapons",
+    "imageUrl": "https://image.pollinations.ai/prompt/fighter%20with%20dragon%20claw%20gauntlets%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 1150,
+    "defense": 1050,
+    "baseValue": 280
+  },
+  {
+    "name": "Dragon Horn Blower",
+    "description": "Calls dragons with ancient horn",
+    "imageUrl": "https://image.pollinations.ai/prompt/warrior%20blowing%20dragon%20horn%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 950,
+    "defense": 1250,
+    "baseValue": 250
+  },
+  {
+    "name": "Dragon Whelp Keeper",
+    "description": "Caretaker of young dragons",
+    "imageUrl": "https://image.pollinations.ai/prompt/keeper%20caring%20for%20dragon%20whelps%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 850,
+    "defense": 1400,
+    "baseValue": 260
+  },
+  {
+    "name": "Flame Acolyte",
+    "description": "Novice of the flame arts",
+    "imageUrl": "https://image.pollinations.ai/prompt/acolyte%20with%20small%20flame%20magic%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dragons",
+    "attack": 1000,
+    "defense": 1100,
+    "baseValue": 240
+  },
+
+  {
+    "name": "Leviathan Ocean Lord",
+    "description": "The ultimate ruler of the deep seas with crushing power",
+    "imageUrl": "https://image.pollinations.ai/prompt/massive%20leviathan%20sea%20monster%20underwater%20epic%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "legendary",
+    "category": "Aqua",
+    "attack": 3300,
+    "defense": 3400,
+    "baseValue": 5000
+  },
+  {
+    "name": "Kraken Destroyer",
+    "description": "Legendary kraken with devastating tentacles",
+    "imageUrl": "https://image.pollinations.ai/prompt/giant%20kraken%20tentacles%20destroying%20ships%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "epic",
+    "category": "Aqua",
+    "attack": 2700,
+    "defense": 2600,
+    "baseValue": 3000
+  },
+  {
+    "name": "Tidal Serpent",
+    "description": "Enormous sea serpent controlling the tides",
+    "imageUrl": "https://image.pollinations.ai/prompt/blue%20sea%20serpent%20creating%20tidal%20waves%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "epic",
+    "category": "Aqua",
+    "attack": 2500,
+    "defense": 2700,
+    "baseValue": 2800
+  },
+  {
+    "name": "Abyssal Whale",
+    "description": "Gigantic whale from the deepest trenches",
+    "imageUrl": "https://image.pollinations.ai/prompt/giant%20abyssal%20whale%20glowing%20underwater%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "epic",
+    "category": "Aqua",
+    "attack": 2600,
+    "defense": 2800,
+    "baseValue": 2900
+  },
+  {
+    "name": "Coral Guardian",
+    "description": "Ancient protector of underwater kingdoms",
+    "imageUrl": "https://image.pollinations.ai/prompt/coral%20armor%20sea%20guardian%20warrior%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Aqua",
+    "attack": 2100,
+    "defense": 2400,
+    "baseValue": 2000
+  },
+  {
+    "name": "Storm Mermaid",
+    "description": "Mermaid sorceress commanding ocean storms",
+    "imageUrl": "https://image.pollinations.ai/prompt/mermaid%20with%20storm%20magic%20underwater%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Aqua",
+    "attack": 2300,
+    "defense": 2100,
+    "baseValue": 1800
+  },
+  {
+    "name": "Deep Sea Hunter",
+    "description": "Predator of the ocean depths",
+    "imageUrl": "https://image.pollinations.ai/prompt/deep%20sea%20hunter%20creature%20glowing%20eyes%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Aqua",
+    "attack": 2250,
+    "defense": 2000,
+    "baseValue": 1900
+  },
+  {
+    "name": "Tsunami Bringer",
+    "description": "Spirit that commands massive waves",
+    "imageUrl": "https://image.pollinations.ai/prompt/water%20spirit%20creating%20tsunami%20waves%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Aqua",
+    "attack": 2200,
+    "defense": 2150,
+    "baseValue": 1950
+  },
+  {
+    "name": "Shark King",
+    "description": "Massive ancient shark ruler",
+    "imageUrl": "https://image.pollinations.ai/prompt/giant%20shark%20king%20underwater%20crown%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Aqua",
+    "attack": 2400,
+    "defense": 1950,
+    "baseValue": 1850
+  },
+  {
+    "name": "Ice Whale",
+    "description": "Frozen whale from arctic waters",
+    "imageUrl": "https://image.pollinations.ai/prompt/ice%20whale%20frozen%20arctic%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Aqua",
+    "attack": 2050,
+    "defense": 2400,
+    "baseValue": 1900
+  },
+  {
+    "name": "Jellyfish Swarm",
+    "description": "Deadly swarm of electric jellyfish",
+    "imageUrl": "https://image.pollinations.ai/prompt/glowing%20electric%20jellyfish%20swarm%20underwater?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Aqua",
+    "attack": 1300,
+    "defense": 1500,
+    "baseValue": 500
+  },
+  {
+    "name": "Pearl Priestess",
+    "description": "Mystic who harnesses the power of pearls",
+    "imageUrl": "https://image.pollinations.ai/prompt/ocean%20priestess%20with%20pearl%20magic%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Aqua",
+    "attack": 1400,
+    "defense": 1700,
+    "baseValue": 600
+  },
+  {
+    "name": "Tide Caller",
+    "description": "Shaman who controls the tides",
+    "imageUrl": "https://image.pollinations.ai/prompt/shaman%20calling%20ocean%20tides%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Aqua",
+    "attack": 1450,
+    "defense": 1600,
+    "baseValue": 580
+  },
+  {
+    "name": "Coral Mage",
+    "description": "Sorcerer using coral magic",
+    "imageUrl": "https://image.pollinations.ai/prompt/mage%20with%20coral%20staff%20underwater%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Aqua",
+    "attack": 1500,
+    "defense": 1550,
+    "baseValue": 600
+  },
+  {
+    "name": "Octopus Warrior",
+    "description": "Eight-armed ocean warrior",
+    "imageUrl": "https://image.pollinations.ai/prompt/octopus%20warrior%20with%20multiple%20weapons%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Aqua",
+    "attack": 1550,
+    "defense": 1450,
+    "baseValue": 570
+  },
+  {
+    "name": "Dolphin Knight",
+    "description": "Noble dolphin warrior",
+    "imageUrl": "https://image.pollinations.ai/prompt/dolphin%20knight%20with%20armor%20underwater%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Aqua",
+    "attack": 1350,
+    "defense": 1650,
+    "baseValue": 580
+  },
+  {
+    "name": "Sea Turtle Scout",
+    "description": "Ancient sea turtle with defensive shell",
+    "imageUrl": "https://image.pollinations.ai/prompt/giant%20sea%20turtle%20with%20mystical%20shell%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 1000,
+    "defense": 1600,
+    "baseValue": 300
+  },
+  {
+    "name": "Starfish Guardian",
+    "description": "Regenerating starfish protector",
+    "imageUrl": "https://image.pollinations.ai/prompt/giant%20starfish%20guardian%20glowing%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 950,
+    "defense": 1500,
+    "baseValue": 280
+  },
+  {
+    "name": "Seaweed Druid",
+    "description": "Nature mage of the kelp forests",
+    "imageUrl": "https://image.pollinations.ai/prompt/druid%20with%20seaweed%20magic%20underwater%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 1000,
+    "defense": 1400,
+    "baseValue": 290
+  },
+  {
+    "name": "Crab Warrior",
+    "description": "Armored crab soldier",
+    "imageUrl": "https://image.pollinations.ai/prompt/giant%20crab%20warrior%20with%20shell%20armor%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 1100,
+    "defense": 1550,
+    "baseValue": 310
+  },
+  {
+    "name": "Seahorse Rider",
+    "description": "Swift seahorse cavalry",
+    "imageUrl": "https://image.pollinations.ai/prompt/rider%20on%20giant%20seahorse%20underwater%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 1150,
+    "defense": 1200,
+    "baseValue": 270
+  },
+  {
+    "name": "Clam Defender",
+    "description": "Protected by impenetrable shell",
+    "imageUrl": "https://image.pollinations.ai/prompt/giant%20clam%20with%20pearl%20inside%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 850,
+    "defense": 1700,
+    "baseValue": 300
+  },
+  {
+    "name": "Eel Striker",
+    "description": "Lightning-fast electric eel",
+    "imageUrl": "https://image.pollinations.ai/prompt/electric%20eel%20striking%20underwater%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 1200,
+    "defense": 1100,
+    "baseValue": 280
+  },
+  {
+    "name": "Bubble Shield",
+    "description": "Protector with bubble magic",
+    "imageUrl": "https://image.pollinations.ai/prompt/guardian%20creating%20bubble%20shields%20underwater%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 900,
+    "defense": 1550,
+    "baseValue": 290
+  },
+  {
+    "name": "Reef Ranger",
+    "description": "Protector of coral reefs",
+    "imageUrl": "https://image.pollinations.ai/prompt/ranger%20protecting%20coral%20reef%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 1050,
+    "defense": 1300,
+    "baseValue": 270
+  },
+  {
+    "name": "Narwhal Knight",
+    "description": "Noble narwhal with horn lance",
+    "imageUrl": "https://image.pollinations.ai/prompt/narwhal%20knight%20with%20horn%20lance%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 1150,
+    "defense": 1250,
+    "baseValue": 290
+  },
+  {
+    "name": "Anemone Healer",
+    "description": "Healing sea anemone",
+    "imageUrl": "https://image.pollinations.ai/prompt/healing%20sea%20anemone%20glowing%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 800,
+    "defense": 1450,
+    "baseValue": 270
+  },
+  {
+    "name": "Tide Pool Mystic",
+    "description": "Seer of tide pools",
+    "imageUrl": "https://image.pollinations.ai/prompt/mystic%20looking%20into%20tide%20pool%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 950,
+    "defense": 1350,
+    "baseValue": 260
+  },
+  {
+    "name": "Kelp Strangler",
+    "description": "Uses kelp to entangle foes",
+    "imageUrl": "https://image.pollinations.ai/prompt/creature%20using%20kelp%20tentacles%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 1100,
+    "defense": 1150,
+    "baseValue": 250
+  },
+  {
+    "name": "Wave Dancer",
+    "description": "Agile warrior riding waves",
+    "imageUrl": "https://image.pollinations.ai/prompt/warrior%20surfing%20ocean%20waves%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Aqua",
+    "attack": 1050,
+    "defense": 1200,
+    "baseValue": 240
+  },
+
+  {
+    "name": "Shadow Demon Emperor",
+    "description": "Supreme dark entity wielding shadow magic beyond comprehension",
+    "imageUrl": "https://image.pollinations.ai/prompt/demonic%20shadow%20emperor%20dark%20throne%20epic%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "legendary",
+    "category": "Dark",
+    "attack": 3600,
+    "defense": 3100,
+    "baseValue": 5000
+  },
+  {
+    "name": "Death Knight Commander",
+    "description": "Undead knight leading the dark armies",
+    "imageUrl": "https://image.pollinations.ai/prompt/death%20knight%20in%20black%20armor%20dark%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "epic",
+    "category": "Dark",
+    "attack": 2900,
+    "defense": 2300,
+    "baseValue": 3000
+  },
+  {
+    "name": "Vampire Lord",
+    "description": "Ancient vampire with blood magic",
+    "imageUrl": "https://image.pollinations.ai/prompt/vampire%20lord%20with%20red%20eyes%20dark%20castle%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "epic",
+    "category": "Dark",
+    "attack": 2700,
+    "defense": 2400,
+    "baseValue": 2800
+  },
+  {
+    "name": "Lich King",
+    "description": "Immortal undead sorcerer",
+    "imageUrl": "https://image.pollinations.ai/prompt/lich%20king%20with%20staff%20undead%20magic%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "epic",
+    "category": "Dark",
+    "attack": 2800,
+    "defense": 2500,
+    "baseValue": 2900
+  },
+  {
+    "name": "Shadow Assassin",
+    "description": "Master of stealth and deadly strikes",
+    "imageUrl": "https://image.pollinations.ai/prompt/dark%20assassin%20in%20shadows%20with%20daggers%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Dark",
+    "attack": 2500,
+    "defense": 1900,
+    "baseValue": 2000
+  },
+  {
+    "name": "Necromancer",
+    "description": "Dark sorcerer raising the dead",
+    "imageUrl": "https://image.pollinations.ai/prompt/necromancer%20with%20skull%20staff%20summoning%20undead?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Dark",
+    "attack": 2200,
+    "defense": 2200,
+    "baseValue": 1800
+  },
+  {
+    "name": "Demon Knight",
+    "description": "Infernal warrior in cursed armor",
+    "imageUrl": "https://image.pollinations.ai/prompt/demon%20knight%20in%20hellfire%20armor%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Dark",
+    "attack": 2400,
+    "defense": 2000,
+    "baseValue": 1900
+  },
+  {
+    "name": "Void Mage",
+    "description": "Wielder of void magic",
+    "imageUrl": "https://image.pollinations.ai/prompt/void%20mage%20with%20dark%20energy%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Dark",
+    "attack": 2300,
+    "defense": 2100,
+    "baseValue": 1850
+  },
+  {
+    "name": "Demon Warrior",
+    "description": "Fierce demon from the abyss",
+    "imageUrl": "https://image.pollinations.ai/prompt/demon%20warrior%20with%20horns%20dark%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Dark",
+    "attack": 2350,
+    "defense": 1950,
+    "baseValue": 1900
+  },
+  {
+    "name": "Black Dragon",
+    "description": "Corrupted dragon of darkness",
+    "imageUrl": "https://image.pollinations.ai/prompt/black%20dragon%20with%20dark%20flames%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Dark",
+    "attack": 2250,
+    "defense": 2150,
+    "baseValue": 1950
+  },
+  {
+    "name": "Wraith Phantom",
+    "description": "Ghostly spirit that drains life energy",
+    "imageUrl": "https://image.pollinations.ai/prompt/ghostly%20wraith%20spirit%20dark%20mist%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Dark",
+    "attack": 1500,
+    "defense": 1400,
+    "baseValue": 500
+  },
+  {
+    "name": "Dark Cultist",
+    "description": "Follower of forbidden dark arts",
+    "imageUrl": "https://image.pollinations.ai/prompt/hooded%20dark%20cultist%20with%20ritual%20book%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Dark",
+    "attack": 1300,
+    "defense": 1500,
+    "baseValue": 600
+  },
+  {
+    "name": "Shadow Priest",
+    "description": "Cleric of dark deities",
+    "imageUrl": "https://image.pollinations.ai/prompt/shadow%20priest%20with%20dark%20staff%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Dark",
+    "attack": 1400,
+    "defense": 1600,
+    "baseValue": 580
+  },
+  {
+    "name": "Vampire Spawn",
+    "description": "Lesser vampire minion",
+    "imageUrl": "https://image.pollinations.ai/prompt/vampire%20spawn%20with%20fangs%20dark%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Dark",
+    "attack": 1550,
+    "defense": 1350,
+    "baseValue": 550
+  },
+  {
+    "name": "Zombie Brute",
+    "description": "Massive undead creature",
+    "imageUrl": "https://image.pollinations.ai/prompt/giant%20zombie%20brute%20undead%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Dark",
+    "attack": 1600,
+    "defense": 1500,
+    "baseValue": 600
+  },
+  {
+    "name": "Hellhound",
+    "description": "Fiery canine from the underworld",
+    "imageUrl": "https://image.pollinations.ai/prompt/hellhound%20with%20flames%20dark%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Dark",
+    "attack": 1450,
+    "defense": 1400,
+    "baseValue": 570
+  },
+  {
+    "name": "Shadow Imp",
+    "description": "Small demon creature lurking in darkness",
+    "imageUrl": "https://image.pollinations.ai/prompt/small%20shadow%20imp%20demon%20dark%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 1100,
+    "defense": 1200,
+    "baseValue": 300
+  },
+  {
+    "name": "Skeleton Warrior",
+    "description": "Reanimated skeletal soldier",
+    "imageUrl": "https://image.pollinations.ai/prompt/skeleton%20warrior%20with%20sword%20undead%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 1050,
+    "defense": 1150,
+    "baseValue": 270
+  },
+  {
+    "name": "Bat Swarm",
+    "description": "Swarm of vampiric bats",
+    "imageUrl": "https://image.pollinations.ai/prompt/swarm%20of%20vampire%20bats%20dark%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 1150,
+    "defense": 1000,
+    "baseValue": 260
+  },
+  {
+    "name": "Ghost",
+    "description": "Ethereal haunting spirit",
+    "imageUrl": "https://image.pollinations.ai/prompt/haunting%20ghost%20spirit%20dark%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 1000,
+    "defense": 1300,
+    "baseValue": 280
+  },
+  {
+    "name": "Dark Apprentice",
+    "description": "Student of dark magic",
+    "imageUrl": "https://image.pollinations.ai/prompt/dark%20apprentice%20learning%20shadow%20magic%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 950,
+    "defense": 1250,
+    "baseValue": 270
+  },
+  {
+    "name": "Cursed Knight",
+    "description": "Knight corrupted by dark curse",
+    "imageUrl": "https://image.pollinations.ai/prompt/cursed%20knight%20with%20dark%20aura%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 1200,
+    "defense": 1300,
+    "baseValue": 310
+  },
+  {
+    "name": "Shade",
+    "description": "Living shadow creature",
+    "imageUrl": "https://image.pollinations.ai/prompt/shade%20creature%20living%20shadow%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 1100,
+    "defense": 1100,
+    "baseValue": 250
+  },
+  {
+    "name": "Bone Collector",
+    "description": "Gatherer of skeletal remains",
+    "imageUrl": "https://image.pollinations.ai/prompt/bone%20collector%20with%20skeleton%20parts%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 1000,
+    "defense": 1350,
+    "baseValue": 290
+  },
+  {
+    "name": "Plague Rat",
+    "description": "Disease-carrying rodent",
+    "imageUrl": "https://image.pollinations.ai/prompt/giant%20plague%20rat%20dark%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 1050,
+    "defense": 1050,
+    "baseValue": 240
+  },
+  {
+    "name": "Dark Acolyte",
+    "description": "Novice of dark rituals",
+    "imageUrl": "https://image.pollinations.ai/prompt/dark%20acolyte%20performing%20ritual%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 950,
+    "defense": 1300,
+    "baseValue": 270
+  },
+  {
+    "name": "Carrion Crow",
+    "description": "Omen of death and decay",
+    "imageUrl": "https://image.pollinations.ai/prompt/giant%20carrion%20crow%20dark%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 1000,
+    "defense": 1100,
+    "baseValue": 250
+  },
+  {
+    "name": "Tomb Guardian",
+    "description": "Protector of ancient crypts",
+    "imageUrl": "https://image.pollinations.ai/prompt/tomb%20guardian%20in%20crypt%20undead%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 1050,
+    "defense": 1450,
+    "baseValue": 300
+  },
+  {
+    "name": "Night Stalker",
+    "description": "Hunter of the darkness",
+    "imageUrl": "https://image.pollinations.ai/prompt/night%20stalker%20hunting%20in%20darkness%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 1150,
+    "defense": 1050,
+    "baseValue": 260
+  },
+  {
+    "name": "Soul Eater",
+    "description": "Feeds on life essence",
+    "imageUrl": "https://image.pollinations.ai/prompt/soul%20eater%20consuming%20essence%20dark%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Dark",
+    "attack": 1100,
+    "defense": 1200,
+    "baseValue": 280
+  },
+
+  {
+    "name": "Archangel Supreme",
+    "description": "The highest celestial being radiating divine power",
+    "imageUrl": "https://image.pollinations.ai/prompt/golden%20archangel%20with%20holy%20wings%20divine%20light%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "legendary",
+    "category": "Holy",
+    "attack": 3400,
+    "defense": 3300,
+    "baseValue": 5000
+  },
+  {
+    "name": "Paladin Crusader",
+    "description": "Holy warrior blessed with divine strength",
+    "imageUrl": "https://image.pollinations.ai/prompt/paladin%20in%20golden%20armor%20holy%20sword%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "epic",
+    "category": "Holy",
+    "attack": 2800,
+    "defense": 2500,
+    "baseValue": 3000
+  },
+  {
+    "name": "Light Phoenix",
+    "description": "Sacred phoenix radiating holy flames",
+    "imageUrl": "https://image.pollinations.ai/prompt/white%20phoenix%20with%20golden%20flames%20holy%20light?width=400&height=600&nologo=true&model=flux",
+    "rarity": "epic",
+    "category": "Holy",
+    "attack": 2600,
+    "defense": 2600,
+    "baseValue": 2800
+  },
+  {
+    "name": "Seraphim",
+    "description": "Six-winged angel of the highest order",
+    "imageUrl": "https://image.pollinations.ai/prompt/seraphim%20angel%20six%20wings%20divine%20light%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "epic",
+    "category": "Holy",
+    "attack": 2700,
+    "defense": 2700,
+    "baseValue": 2900
+  },
+  {
+    "name": "Celestial Guardian",
+    "description": "Divine protector from the heavens",
+    "imageUrl": "https://image.pollinations.ai/prompt/celestial%20guardian%20angel%20with%20shield%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Holy",
+    "attack": 2000,
+    "defense": 2600,
+    "baseValue": 2000
+  },
+  {
+    "name": "High Priestess",
+    "description": "Divine oracle channeling holy magic",
+    "imageUrl": "https://image.pollinations.ai/prompt/high%20priestess%20with%20holy%20staff%20divine%20robes?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Holy",
+    "attack": 2100,
+    "defense": 2300,
+    "baseValue": 1800
+  },
+  {
+    "name": "Light Unicorn",
+    "description": "Mythical unicorn of pure light",
+    "imageUrl": "https://image.pollinations.ai/prompt/light%20unicorn%20glowing%20horn%20holy%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Holy",
+    "attack": 2200,
+    "defense": 2200,
+    "baseValue": 1900
+  },
+  {
+    "name": "Divine Champion",
+    "description": "Chosen warrior of the gods",
+    "imageUrl": "https://image.pollinations.ai/prompt/divine%20champion%20with%20holy%20armor%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Holy",
+    "attack": 2300,
+    "defense": 2000,
+    "baseValue": 1850
+  },
+  {
+    "name": "Angel of Justice",
+    "description": "Enforcer of divine law",
+    "imageUrl": "https://image.pollinations.ai/prompt/angel%20of%20justice%20with%20sword%20scales%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Holy",
+    "attack": 2250,
+    "defense": 2100,
+    "baseValue": 1900
+  },
+  {
+    "name": "Radiant Pegasus",
+    "description": "Winged horse of divine light",
+    "imageUrl": "https://image.pollinations.ai/prompt/radiant%20pegasus%20flying%20holy%20light%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "rare",
+    "category": "Holy",
+    "attack": 2150,
+    "defense": 2150,
+    "baseValue": 1850
+  },
+  {
+    "name": "Holy Knight",
+    "description": "Devout knight wielding blessed weapons",
+    "imageUrl": "https://image.pollinations.ai/prompt/holy%20knight%20white%20armor%20glowing%20sword%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Holy",
+    "attack": 1600,
+    "defense": 1400,
+    "baseValue": 500
+  },
+  {
+    "name": "Divine Healer",
+    "description": "Blessed cleric with healing powers",
+    "imageUrl": "https://image.pollinations.ai/prompt/divine%20healer%20cleric%20holy%20light%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Holy",
+    "attack": 1200,
+    "defense": 1700,
+    "baseValue": 600
+  },
+  {
+    "name": "Light Bearer",
+    "description": "Carrier of the sacred flame",
+    "imageUrl": "https://image.pollinations.ai/prompt/light%20bearer%20with%20holy%20flame%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Holy",
+    "attack": 1500,
+    "defense": 1500,
+    "baseValue": 580
+  },
+  {
+    "name": "Prayer Monk",
+    "description": "Devout monk channeling divine power",
+    "imageUrl": "https://image.pollinations.ai/prompt/prayer%20monk%20meditating%20holy%20light%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Holy",
+    "attack": 1400,
+    "defense": 1600,
+    "baseValue": 570
+  },
+  {
+    "name": "Sacred Warrior",
+    "description": "Blessed temple warrior",
+    "imageUrl": "https://image.pollinations.ai/prompt/sacred%20warrior%20temple%20guard%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Holy",
+    "attack": 1550,
+    "defense": 1450,
+    "baseValue": 590
+  },
+  {
+    "name": "Angel Scout",
+    "description": "Swift messenger angel",
+    "imageUrl": "https://image.pollinations.ai/prompt/angel%20scout%20with%20wings%20flying%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "uncommon",
+    "category": "Holy",
+    "attack": 1450,
+    "defense": 1350,
+    "baseValue": 550
+  },
+  {
+    "name": "Temple Guardian",
+    "description": "Protector of sacred temples",
+    "imageUrl": "https://image.pollinations.ai/prompt/temple%20guardian%20statue%20coming%20to%20life%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 1000,
+    "defense": 1500,
+    "baseValue": 300
+  },
+  {
+    "name": "Acolyte",
+    "description": "Novice of holy arts",
+    "imageUrl": "https://image.pollinations.ai/prompt/holy%20acolyte%20with%20prayer%20book%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 950,
+    "defense": 1250,
+    "baseValue": 270
+  },
+  {
+    "name": "Blessing Priest",
+    "description": "Priest who grants blessings",
+    "imageUrl": "https://image.pollinations.ai/prompt/blessing%20priest%20casting%20holy%20magic%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 1000,
+    "defense": 1400,
+    "baseValue": 290
+  },
+  {
+    "name": "Choir Singer",
+    "description": "Singer of holy hymns",
+    "imageUrl": "https://image.pollinations.ai/prompt/choir%20singer%20with%20holy%20light%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 850,
+    "defense": 1350,
+    "baseValue": 260
+  },
+  {
+    "name": "Dove Messenger",
+    "description": "Sacred dove carrying messages",
+    "imageUrl": "https://image.pollinations.ai/prompt/holy%20dove%20with%20glowing%20light%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 900,
+    "defense": 1200,
+    "baseValue": 240
+  },
+  {
+    "name": "Shield Bearer",
+    "description": "Defender with blessed shield",
+    "imageUrl": "https://image.pollinations.ai/prompt/shield%20bearer%20with%20holy%20shield%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 1050,
+    "defense": 1550,
+    "baseValue": 310
+  },
+  {
+    "name": "Candle Keeper",
+    "description": "Guardian of eternal flames",
+    "imageUrl": "https://image.pollinations.ai/prompt/keeper%20with%20holy%20candles%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 900,
+    "defense": 1400,
+    "baseValue": 280
+  },
+  {
+    "name": "Bell Ringer",
+    "description": "Rings bells to ward evil",
+    "imageUrl": "https://image.pollinations.ai/prompt/bell%20ringer%20with%20holy%20bells%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 950,
+    "defense": 1300,
+    "baseValue": 270
+  },
+  {
+    "name": "Scripture Scholar",
+    "description": "Keeper of holy texts",
+    "imageUrl": "https://image.pollinations.ai/prompt/scholar%20with%20holy%20scripture%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 850,
+    "defense": 1450,
+    "baseValue": 280
+  },
+  {
+    "name": "Cross Bearer",
+    "description": "Wielder of the holy cross",
+    "imageUrl": "https://image.pollinations.ai/prompt/warrior%20bearing%20holy%20cross%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 1100,
+    "defense": 1300,
+    "baseValue": 290
+  },
+  {
+    "name": "Incense Burner",
+    "description": "Burns sacred incense for protection",
+    "imageUrl": "https://image.pollinations.ai/prompt/priest%20burning%20holy%20incense%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 900,
+    "defense": 1350,
+    "baseValue": 270
+  },
+  {
+    "name": "Holy Water Keeper",
+    "description": "Guardian of blessed waters",
+    "imageUrl": "https://image.pollinations.ai/prompt/keeper%20with%20holy%20water%20vial%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 950,
+    "defense": 1250,
+    "baseValue": 260
+  },
+  {
+    "name": "Prayer Bead Monk",
+    "description": "Monk with blessed prayer beads",
+    "imageUrl": "https://image.pollinations.ai/prompt/monk%20with%20prayer%20beads%20meditating%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 1000,
+    "defense": 1200,
+    "baseValue": 250
+  },
+  {
+    "name": "Altar Attendant",
+    "description": "Caretaker of sacred altars",
+    "imageUrl": "https://image.pollinations.ai/prompt/attendant%20tending%20holy%20altar%20fantasy?width=400&height=600&nologo=true&model=flux",
+    "rarity": "common",
+    "category": "Holy",
+    "attack": 900,
+    "defense": 1300,
+    "baseValue": 260
+  }
+]

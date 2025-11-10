@@ -129,6 +129,7 @@ export interface Game {
   player2Health: number;
   status: GameStatus;
   currentTurnPlayerId?: string;
+  turnNumber: number;
   winnerId?: string;
   winner?: User;
   board: GameCard[];

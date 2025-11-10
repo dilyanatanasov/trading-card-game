@@ -359,22 +359,79 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
 
   if (game.status === GameStatus.FINISHED) {
     const didIWin = game.winnerId === user?.id;
+    const winnerHealth = game.winnerId === game.player1Id ? game.player1Health : game.player2Health;
+    const loserHealth = game.winnerId === game.player1Id ? game.player2Health : game.player1Health;
+
     return (
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-lg p-8 text-center">
-          <div className="text-6xl mb-4">{didIWin ? '🏆' : '💀'}</div>
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
-            {didIWin ? 'Victory!' : 'Defeat'}
-          </h2>
-          <p className="text-xl text-gray-700 dark:text-gray-300 mb-8">
-            {game.winner?.username} wins!
-          </p>
-          <button
-            onClick={onExit}
-            className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold rounded-lg shadow-lg transform transition hover:scale-105"
-          >
-            Return to Lobby
-          </button>
+        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-lg p-8">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <div className="text-8xl mb-4">{didIWin ? '🏆' : '💀'}</div>
+            <h2 className="text-5xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+              {didIWin ? 'Victory!' : 'Defeat'}
+            </h2>
+            <p className="text-2xl text-gray-700 dark:text-gray-300">
+              {game.winner?.username} wins the battle!
+            </p>
+          </div>
+
+          {/* Battle Stats */}
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/30 dark:to-pink-900/30 rounded-lg p-6 mb-6">
+            <h3 className="text-xl font-bold text-center mb-4 text-gray-800 dark:text-gray-200">
+              Battle Summary
+            </h3>
+
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              {/* Winner Stats */}
+              <div className="bg-green-100 dark:bg-green-900/30 rounded-lg p-4 border-2 border-green-500">
+                <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1">Winner</div>
+                <div className="text-lg font-bold text-green-700 dark:text-green-400">
+                  {game.winner?.username}
+                </div>
+                <div className="text-sm text-gray-700 dark:text-gray-300 mt-2">
+                  HP Remaining: <span className="font-bold text-green-600 dark:text-green-400">{winnerHealth}</span>
+                </div>
+              </div>
+
+              {/* Loser Stats */}
+              <div className="bg-red-100 dark:bg-red-900/30 rounded-lg p-4 border-2 border-red-500">
+                <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1">Defeated</div>
+                <div className="text-lg font-bold text-red-700 dark:text-red-400">
+                  {game.winnerId === game.player1Id ? game.player2?.username : game.player1?.username}
+                </div>
+                <div className="text-sm text-gray-700 dark:text-gray-300 mt-2">
+                  HP Remaining: <span className="font-bold text-red-600 dark:text-red-400">{loserHealth}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Game Duration */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-3 text-center">
+                <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                  {game.turnNumber || 1}
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Total Turns</div>
+              </div>
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-3 text-center">
+                <div className="text-2xl font-bold text-pink-600 dark:text-pink-400">
+                  {Math.abs((winnerHealth || 0) - (loserHealth || 0))}
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">HP Difference</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-4 justify-center">
+            <button
+              onClick={onExit}
+              className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold rounded-lg shadow-lg transform transition hover:scale-105"
+            >
+              Return to Lobby
+            </button>
+          </div>
         </div>
       </div>
     );

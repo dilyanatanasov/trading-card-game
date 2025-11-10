@@ -92,7 +92,7 @@ export class GameService {
   async getGame(gameId: string): Promise<Game> {
     const game = await this.gameRepository.findOne({
       where: { id: gameId },
-      relations: ['player1', 'player2', 'board', 'board.card'],
+      relations: ['player1', 'player2', 'winner', 'board', 'board.card'],
     });
 
     if (!game) {
@@ -261,10 +261,10 @@ export class GameService {
         if (targetCard.mode === CardMode.ATTACK) {
           const remainingDamage = attackPower - targetDefenseValue;
           if (attackingCard.playerId === game.player1Id) {
-            game.player2Health -= remainingDamage;
+            game.player2Health = Math.max(0, game.player2Health - remainingDamage);
             console.log(`Player 2 health reduced by ${remainingDamage}. New health: ${game.player2Health}`);
           } else {
-            game.player1Health -= remainingDamage;
+            game.player1Health = Math.max(0, game.player1Health - remainingDamage);
             console.log(`Player 1 health reduced by ${remainingDamage}. New health: ${game.player1Health}`);
           }
           await this.gameRepository.save(game);
@@ -298,10 +298,10 @@ export class GameService {
 
       // Deal damage to opponent
       if (attackingCard.playerId === game.player1Id) {
-        game.player2Health -= attackPower;
+        game.player2Health = Math.max(0, game.player2Health - attackPower);
         console.log(`Direct attack! Player 2 health reduced by ${attackPower}. New health: ${game.player2Health}`);
       } else {
-        game.player1Health -= attackPower;
+        game.player1Health = Math.max(0, game.player1Health - attackPower);
         console.log(`Direct attack! Player 1 health reduced by ${attackPower}. New health: ${game.player1Health}`);
       }
 
@@ -356,6 +356,9 @@ export class GameService {
     // Switch turn
     game.currentTurnPlayerId =
       game.currentTurnPlayerId === game.player1Id ? game.player2Id : game.player1Id;
+
+    // Increment turn number (ensure it starts at 1 if undefined)
+    game.turnNumber = (game.turnNumber || 0) + 1;
 
     // Reset all cards for the new turn
     const playerCards = await this.gameCardRepository.find({

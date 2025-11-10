@@ -52,6 +52,9 @@ export class Game {
   @Column({ nullable: true })
   currentTurnPlayerId: string;
 
+  @Column({ default: 1 })
+  turnNumber: number;
+
   @Column({ nullable: true })
   winnerId: string;
 

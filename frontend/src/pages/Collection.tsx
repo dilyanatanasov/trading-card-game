@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { cardsAPI, marketplaceAPI } from '../services/api';
 import type { UserCard } from '../types';
 import { getRarityStyles } from '../utils/rarity';
+import { AbilityTooltip } from '../components/AbilityTooltip';
 
 export default function Collection() {
   const [collection, setCollection] = useState<UserCard[]>([]);
@@ -105,14 +106,19 @@ export default function Collection() {
                 </span>
               </div>
               {userCard.card.ability && (
-                <div className="mt-2 p-2 bg-purple-50 dark:bg-purple-900/20 border-2 border-purple-400 rounded-lg">
-                  <p className="text-xs font-bold text-purple-700 dark:text-purple-300 flex items-center gap-1">
-                    <span>⚡</span> {userCard.card.ability.name}
-                  </p>
-                  <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">
-                    {userCard.card.ability.description}
-                  </p>
-                </div>
+                <AbilityTooltip ability={userCard.card.ability}>
+                  <div className="mt-2 p-2 bg-purple-50 dark:bg-purple-900/20 border-2 border-purple-400 rounded-lg cursor-help hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors">
+                    <p className="text-xs font-bold text-purple-700 dark:text-purple-300 flex items-center gap-1">
+                      <span>⚡</span> {userCard.card.ability.name}
+                    </p>
+                    <p className="text-xs text-purple-600 dark:text-purple-400 mt-1 line-clamp-2">
+                      {userCard.card.ability.description}
+                    </p>
+                    <p className="text-xs text-purple-500 dark:text-purple-500 mt-1 font-semibold">
+                      Hover for details ↑
+                    </p>
+                  </div>
+                </AbilityTooltip>
               )}
               {sellCardId === userCard.cardId ? (
                 <form onSubmit={handleSellCard} className="mt-3 space-y-2">

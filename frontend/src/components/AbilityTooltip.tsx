@@ -14,18 +14,23 @@ import {
 } from '@floating-ui/react';
 
 interface AbilityTooltipProps {
-  ability: {
+  ability?: {
     name: string;
     description: string;
     type?: string;
     trigger?: string;
     value?: number;
-  };
+  } | null;
   children: React.ReactNode;
 }
 
 export function AbilityTooltip({ ability, children }: AbilityTooltipProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  // If no ability, just render children without tooltip
+  if (!ability) {
+    return <>{children}</>;
+  }
 
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,

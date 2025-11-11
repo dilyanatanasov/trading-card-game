@@ -229,36 +229,13 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
           `}
         >
           {cardInSlot && cardInSlot.card ? (
-            <div className="h-full flex items-center justify-center overflow-visible">
-              {cardInSlot.card.ability ? (
-                <AbilityTooltip ability={cardInSlot.card.ability}>
-                  <div className={`h-full w-full flex flex-col p-2 bg-white dark:bg-gray-800 rounded-lg transition-transform shadow-lg ${cardInSlot.mode === CardMode.DEFENSE ? 'rotate-90 scale-90' : ''}`}>
-                    <div className="text-xs font-bold truncate mb-1 flex items-center gap-1">
-                      {cardInSlot.card.ability && <span className="text-purple-500">⚡</span>}
-                      {cardInSlot.card.name}
-                    </div>
-                    <div className="flex-1 flex items-center justify-center">
-                      <img
-                        src={cardInSlot.card.imageUrl}
-                        alt={cardInSlot.card.name}
-                        className="w-full h-full object-cover rounded"
-                      />
-                    </div>
-                    <div className="mt-1 flex items-center justify-between text-xs">
-                      <span className="text-red-600 dark:text-red-400">⚔️{cardInSlot.card.attack}</span>
-                      <span className="text-blue-600 dark:text-blue-400">🛡️{cardInSlot.card.defense}</span>
-                    </div>
-                    <div className="text-xs text-center mt-1">
-                      {cardInSlot.mode === CardMode.ATTACK ? '⚔️ ATK' : '🛡️ DEF'}
-                    </div>
-                    {cardInSlot.hasActedThisTurn && (
-                      <div className="text-xs text-gray-500 text-center">Used</div>
-                    )}
-                  </div>
-                </AbilityTooltip>
-              ) : (
+            <AbilityTooltip ability={cardInSlot.card.ability}>
+              <div className="h-full w-full flex items-center justify-center">
                 <div className={`h-full w-full flex flex-col p-2 bg-white dark:bg-gray-800 rounded-lg transition-transform shadow-lg ${cardInSlot.mode === CardMode.DEFENSE ? 'rotate-90 scale-90' : ''}`}>
-                  <div className="text-xs font-bold truncate mb-1">{cardInSlot.card.name}</div>
+                  <div className="text-xs font-bold truncate mb-1 flex items-center gap-1">
+                    {cardInSlot.card.ability && <span className="text-purple-500">⚡</span>}
+                    {cardInSlot.card.name}
+                  </div>
                   <div className="flex-1 flex items-center justify-center">
                     <img
                       src={cardInSlot.card.imageUrl}
@@ -277,8 +254,8 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
                     <div className="text-xs text-gray-500 text-center">Used</div>
                   )}
                 </div>
-              )}
-            </div>
+              </div>
+            </AbilityTooltip>
           ) : cardInSlot && !cardInSlot.card ? (
             <div className="h-full flex items-center justify-center text-xs text-gray-500 dark:text-gray-400">
               Loading...

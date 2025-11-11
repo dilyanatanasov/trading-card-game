@@ -13,6 +13,8 @@ import { UserCard } from '../cards/entities/user-card.entity';
 import { CreateGameDto } from './dto/create-game.dto';
 import { PlaceCardDto } from './dto/place-card.dto';
 import { GameActionDto, GameActionType } from './dto/game-action.dto';
+import { AbilityExecutorService } from './services/ability-executor.service';
+import { CardAbilityTrigger } from '../cards/enums/card-ability.enum';
 
 @Injectable()
 export class GameService {
@@ -25,6 +27,7 @@ export class GameService {
     private gameRecordRepository: Repository<GameRecord>,
     @InjectRepository(UserCard)
     private userCardRepository: Repository<UserCard>,
+    private abilityExecutor: AbilityExecutorService,
   ) {}
 
   async createGame(userId: string, createGameDto: CreateGameDto): Promise<Game> {
@@ -159,7 +162,18 @@ export class GameService {
       hasActedThisTurn: true, // Card just placed, cannot act immediately
     });
 
-    await this.gameCardRepository.save(gameCard);
+    const savedGameCard = await this.gameCardRepository.save(gameCard);
+
+    // Load the full card data for ability execution
+    const gameCardWithCard = await this.gameCardRepository.findOne({
+      where: { id: savedGameCard.id },
+      relations: ['card'],
+    });
+
+    // Trigger ON_PLAY ability
+    const updatedGame = await this.gameRepository.findOne({ where: { id: gameId } });
+    await this.abilityExecutor.executeAbility(updatedGame, gameCardWithCard, CardAbilityTrigger.ON_PLAY);
+    await this.gameRepository.save(updatedGame);
 
     // End turn after placing a card
     await this.endTurn(gameId, userId);

@@ -35,7 +35,14 @@
       "Bash(git branch:*)",
       "Bash(git push:*)",
       "Bash(node:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(timeout 5 bash:*)",
+      "Bash(timeout 30 bash:*)",
+      "Bash(git rm:*)",
+      "Bash(tar:*)",
+      "Bash(nul)",
+      "Bash(git ls-tree:*)",
+      "Bash(npx typeorm:*)"
     ],
     "deny": [],
     "ask": []

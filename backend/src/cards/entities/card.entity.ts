@@ -48,6 +48,9 @@ export class Card {
   @Column({ nullable: true })
   category: string;
 
+  @Column({ type: 'jsonb', nullable: true })
+  ability: any; // Stores CardAbility interface
+
   @CreateDateColumn()
   createdAt: Date;
 

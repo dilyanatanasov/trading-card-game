@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { GameController } from './game.controller';
 import { GameService } from './game.service';
 import { GameGateway } from './game.gateway';
+import { AbilityExecutorService } from './services/ability-executor.service';
 import { Game } from './entities/game.entity';
 import { GameCard } from './entities/game-card.entity';
 import { GameRecord } from './entities/game-record.entity';
@@ -18,7 +19,7 @@ import { UserCard } from '../cards/entities/user-card.entity';
     }),
   ],
   controllers: [GameController],
-  providers: [GameService, GameGateway],
+  providers: [GameService, GameGateway, AbilityExecutorService],
   exports: [GameService],
 })
 export class GameModule {}

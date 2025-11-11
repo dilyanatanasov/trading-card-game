@@ -96,6 +96,24 @@ export default function Collection() {
               <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
                 <span className="text-yellow-500">⚜</span> Value: {userCard.card.baseValue} coins
               </p>
+              <div className="flex gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                <span className="flex items-center gap-1">
+                  <span className="text-red-500">⚔️</span> ATK: {userCard.card.attack}
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="text-blue-500">🛡️</span> DEF: {userCard.card.defense}
+                </span>
+              </div>
+              {userCard.card.ability && (
+                <div className="mt-2 p-2 bg-purple-50 dark:bg-purple-900/20 border-2 border-purple-400 rounded-lg">
+                  <p className="text-xs font-bold text-purple-700 dark:text-purple-300 flex items-center gap-1">
+                    <span>⚡</span> {userCard.card.ability.name}
+                  </p>
+                  <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">
+                    {userCard.card.ability.description}
+                  </p>
+                </div>
+              )}
               {sellCardId === userCard.cardId ? (
                 <form onSubmit={handleSellCard} className="mt-3 space-y-2">
                   <input

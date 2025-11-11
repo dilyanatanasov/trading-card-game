@@ -4,6 +4,7 @@ import { gameAPI, cardsAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { gameSocket } from '../services/socket';
 import DeckDisplay from './DeckDisplay';
+import { AbilityTooltip } from './AbilityTooltip';
 
 interface GameBoardProps {
   game: Game;
@@ -229,26 +230,54 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
         >
           {cardInSlot && cardInSlot.card ? (
             <div className="h-full flex items-center justify-center overflow-visible">
-              <div className={`h-full w-full flex flex-col p-2 bg-white dark:bg-gray-800 rounded-lg transition-transform shadow-lg ${cardInSlot.mode === CardMode.DEFENSE ? 'rotate-90 scale-90' : ''}`}>
-                <div className="text-xs font-bold truncate mb-1">{cardInSlot.card.name}</div>
-                <div className="flex-1 flex items-center justify-center">
-                  <img
-                    src={cardInSlot.card.imageUrl}
-                    alt={cardInSlot.card.name}
-                    className="w-full h-full object-cover rounded"
-                  />
+              {cardInSlot.card.ability ? (
+                <AbilityTooltip ability={cardInSlot.card.ability}>
+                  <div className={`h-full w-full flex flex-col p-2 bg-white dark:bg-gray-800 rounded-lg transition-transform shadow-lg ${cardInSlot.mode === CardMode.DEFENSE ? 'rotate-90 scale-90' : ''}`}>
+                    <div className="text-xs font-bold truncate mb-1 flex items-center gap-1">
+                      {cardInSlot.card.ability && <span className="text-purple-500">⚡</span>}
+                      {cardInSlot.card.name}
+                    </div>
+                    <div className="flex-1 flex items-center justify-center">
+                      <img
+                        src={cardInSlot.card.imageUrl}
+                        alt={cardInSlot.card.name}
+                        className="w-full h-full object-cover rounded"
+                      />
+                    </div>
+                    <div className="mt-1 flex items-center justify-between text-xs">
+                      <span className="text-red-600 dark:text-red-400">⚔️{cardInSlot.card.attack}</span>
+                      <span className="text-blue-600 dark:text-blue-400">🛡️{cardInSlot.card.defense}</span>
+                    </div>
+                    <div className="text-xs text-center mt-1">
+                      {cardInSlot.mode === CardMode.ATTACK ? '⚔️ ATK' : '🛡️ DEF'}
+                    </div>
+                    {cardInSlot.hasActedThisTurn && (
+                      <div className="text-xs text-gray-500 text-center">Used</div>
+                    )}
+                  </div>
+                </AbilityTooltip>
+              ) : (
+                <div className={`h-full w-full flex flex-col p-2 bg-white dark:bg-gray-800 rounded-lg transition-transform shadow-lg ${cardInSlot.mode === CardMode.DEFENSE ? 'rotate-90 scale-90' : ''}`}>
+                  <div className="text-xs font-bold truncate mb-1">{cardInSlot.card.name}</div>
+                  <div className="flex-1 flex items-center justify-center">
+                    <img
+                      src={cardInSlot.card.imageUrl}
+                      alt={cardInSlot.card.name}
+                      className="w-full h-full object-cover rounded"
+                    />
+                  </div>
+                  <div className="mt-1 flex items-center justify-between text-xs">
+                    <span className="text-red-600 dark:text-red-400">⚔️{cardInSlot.card.attack}</span>
+                    <span className="text-blue-600 dark:text-blue-400">🛡️{cardInSlot.card.defense}</span>
+                  </div>
+                  <div className="text-xs text-center mt-1">
+                    {cardInSlot.mode === CardMode.ATTACK ? '⚔️ ATK' : '🛡️ DEF'}
+                  </div>
+                  {cardInSlot.hasActedThisTurn && (
+                    <div className="text-xs text-gray-500 text-center">Used</div>
+                  )}
                 </div>
-                <div className="mt-1 flex items-center justify-between text-xs">
-                  <span className="text-red-600 dark:text-red-400">⚔️{cardInSlot.card.attack}</span>
-                  <span className="text-blue-600 dark:text-blue-400">🛡️{cardInSlot.card.defense}</span>
-                </div>
-                <div className="text-xs text-center mt-1">
-                  {cardInSlot.mode === CardMode.ATTACK ? '⚔️ ATK' : '🛡️ DEF'}
-                </div>
-                {cardInSlot.hasActedThisTurn && (
-                  <div className="text-xs text-gray-500 text-center">Used</div>
-                )}
-              </div>
+              )}
             </div>
           ) : cardInSlot && !cardInSlot.card ? (
             <div className="h-full flex items-center justify-center text-xs text-gray-500 dark:text-gray-400">
@@ -488,33 +517,68 @@ export default function GameBoard({ game: initialGame, onRefresh, onExit }: Game
             <div className="flex flex-col gap-3 max-h-[calc(100vh-250px)] overflow-y-auto p-2 bg-gray-100 dark:bg-gray-800/50 rounded-lg">
               {handCards.map((card) => (
                 <div key={card.id} className="relative">
-                  <div
-                    onClick={() => {
-                      if (isMyTurn) {
-                        setSelectedCard(card);
-                        setActionMode('place');
-                        setSelectedBoardCard(null);
-                      }
-                    }}
-                    className={`
-                      rounded-lg border-2 transition-all p-1 flex-shrink-0
-                      ${selectedCard?.id === card.id && actionMode === 'place' ? 'border-green-500 ring-2 ring-green-500' : 'border-gray-300 dark:border-gray-700'}
-                      ${isMyTurn ? 'cursor-pointer hover:border-green-400 hover:shadow-lg' : 'cursor-not-allowed opacity-50'}
-                    `}
-                  >
-                    <div className="flex flex-col bg-white dark:bg-gray-800 rounded">
-                      <div className="text-xs font-bold truncate px-1 py-0.5">{card.name}</div>
-                      <img
-                        src={card.imageUrl}
-                        alt={card.name}
-                        className="w-full h-32 object-cover rounded"
-                      />
-                      <div className="flex justify-between text-xs px-1 py-0.5">
-                        <span className="text-red-600 dark:text-red-400">⚔️{card.attack}</span>
-                        <span className="text-blue-600 dark:text-blue-400">🛡️{card.defense}</span>
+                  {card.ability ? (
+                    <AbilityTooltip ability={card.ability}>
+                      <div
+                        onClick={() => {
+                          if (isMyTurn) {
+                            setSelectedCard(card);
+                            setActionMode('place');
+                            setSelectedBoardCard(null);
+                          }
+                        }}
+                        className={`
+                          rounded-lg border-2 transition-all p-1 flex-shrink-0
+                          ${selectedCard?.id === card.id && actionMode === 'place' ? 'border-green-500 ring-2 ring-green-500' : 'border-gray-300 dark:border-gray-700'}
+                          ${isMyTurn ? 'cursor-pointer hover:border-green-400 hover:shadow-lg' : 'cursor-not-allowed opacity-50'}
+                        `}
+                      >
+                        <div className="flex flex-col bg-white dark:bg-gray-800 rounded">
+                          <div className="text-xs font-bold truncate px-1 py-0.5 flex items-center gap-1">
+                            <span className="text-purple-500">⚡</span>
+                            {card.name}
+                          </div>
+                          <img
+                            src={card.imageUrl}
+                            alt={card.name}
+                            className="w-full h-32 object-cover rounded"
+                          />
+                          <div className="flex justify-between text-xs px-1 py-0.5">
+                            <span className="text-red-600 dark:text-red-400">⚔️{card.attack}</span>
+                            <span className="text-blue-600 dark:text-blue-400">🛡️{card.defense}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </AbilityTooltip>
+                  ) : (
+                    <div
+                      onClick={() => {
+                        if (isMyTurn) {
+                          setSelectedCard(card);
+                          setActionMode('place');
+                          setSelectedBoardCard(null);
+                        }
+                      }}
+                      className={`
+                        rounded-lg border-2 transition-all p-1 flex-shrink-0
+                        ${selectedCard?.id === card.id && actionMode === 'place' ? 'border-green-500 ring-2 ring-green-500' : 'border-gray-300 dark:border-gray-700'}
+                        ${isMyTurn ? 'cursor-pointer hover:border-green-400 hover:shadow-lg' : 'cursor-not-allowed opacity-50'}
+                      `}
+                    >
+                      <div className="flex flex-col bg-white dark:bg-gray-800 rounded">
+                        <div className="text-xs font-bold truncate px-1 py-0.5">{card.name}</div>
+                        <img
+                          src={card.imageUrl}
+                          alt={card.name}
+                          className="w-full h-32 object-cover rounded"
+                        />
+                        <div className="flex justify-between text-xs px-1 py-0.5">
+                          <span className="text-red-600 dark:text-red-400">⚔️{card.attack}</span>
+                          <span className="text-blue-600 dark:text-blue-400">🛡️{card.defense}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* Mode Selection Popup */}
                   {selectedCard?.id === card.id && actionMode === 'place' && isMyTurn && (
